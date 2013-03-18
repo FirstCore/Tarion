@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowRulesPage.class.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: ShowRulesPage.class.php 2496 2013-01-01 13:26:23Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -40,10 +40,11 @@ class ShowRulesPage extends AbstractPage
 	
 	function show() 
 	{
-		global $LANG;
+		global $LNG;
 		$this->assign(array(
-			'rules'				=> $LANG->getExtra('rules'),
+			'rules'		=> $LNG->getTemplate('rules'),
 		));
+		
 		$this->render('page.rules.default.tpl');
 	}
 }

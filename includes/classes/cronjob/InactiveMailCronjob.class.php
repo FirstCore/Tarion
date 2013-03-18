@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2011 Jan Kröpke
+ *  Copyright (C) 2011 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
  * @copyright 2009 Lucky
- * @copyright 2011 Jan Kröpke <info@2moons.cc>
+ * @copyright 2011 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.0 (2011-12-10)
- * @info $Id: InactiveMailCronjob.class.php 2425 2012-11-11 18:22:40Z slaver7 $
+ * @info $Id: InactiveMailCronjob.class.php 2566 2013-01-08 21:44:49Z fabio.chimienti $
  * @link http://code.google.com/p/2moons/
  */
 
@@ -31,25 +31,33 @@ class InactiveMailCronjob
 {
 	function run()
 	{
-		global $LNG, $LANG;
+		global $LNG;
 		
 		$CONFIG	= Config::getAll(NULL);
 		$CONF	= $CONFIG[ROOT_UNI];
+		$langObjects	= array();
+		
+		require_once ROOT_PATH.'includes/classes/Mail.class.php';
 		
 		if($CONF['mail_active'] == 1) {
-			$Users	= $GLOBALS['DATABASE']->query("SELECT `id`, `username`, `lang`, `email`, `onlinetime`, `universe` FROM ".USERS." WHERE `inactive_mail` = '0' AND `onlinetime` < '".(TIMESTAMP - $CONF['del_user_sendmail'])."';");
-			while($User	= $GLOBALS['DATABASE']->fetch_array($Users)) {
-				$LANG->setUser($User['lang']);	
-				$LANG->includeLang(array('L18N', 'INGAME', 'PUBLIC'));
-				$MailSubject	= sprintf($LNG['spec_mail_inactive_title'], $CONF['game_name'].' - '.$CONFIG[$User['universe']]['uni_name']);
-				$MailRAW		= file_get_contents("./language/".$User['lang']."/email/email_inactive.txt");
-				$MailContent	= sprintf($MailRAW, $User['username'], $CONF['game_name'].' - '.$CONFIG[$User['universe']]['uni_name'], _date($LNG['php_tdformat'], $User['onlinetime']), PROTOCOL.$_SERVER['HTTP_HOST'].HTTP_ROOT);	
+			$Users	= $GLOBALS['DATABASE']->query("SELECT `id`, `username`, `lang`, `email`, `onlinetime`, `universe` FROM ".USERS." WHERE `inactive_mail` = '0' AND `onlinetime` < '".(TIMESTAMP - $CONF['del_user_sendmail'] * 24 * 60 * 60)."';");
+			while($User	= $GLOBALS['DATABASE']->fetch_array($Users))
+			{
+				if(!isset($langObjects[$User['lang']]))
+				{
+					$langObjects[$User['lang']]	= new Language($User['lang']);
+					$langObjects[$User['lang']]->includeData(array('L18N', 'INGAME', 'PUBLIC', 'CUSTOM'));
+				}
 				
-				require ROOT_PATH.'includes/classes/Mail.class.php';		
+				$LNG			= $langObjects[$User['lang']];
+				
+				$MailSubject	= sprintf($LNG['spec_mail_inactive_title'], $CONF['game_name'].' - '.$CONFIG[$User['universe']]['uni_name']);
+				$MailRAW		= $LNG->getTemplate('email_inactive');
+				$MailContent	= sprintf($MailRAW, $User['username'], $CONF['game_name'].' - '.$CONFIG[$User['universe']]['uni_name'], _date($LNG['php_tdformat'], $User['onlinetime']), PROTOCOL.$_SERVER['HTTP_HOST'].HTTP_ROOT);	
+						
 				Mail::send($User['email'], $User['username'], $MailSubject, $MailContent);
 				$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET `inactive_mail` = '1' WHERE `id` = '".$User['id']."';");
 			}
 		}
 	}
 }
-?>

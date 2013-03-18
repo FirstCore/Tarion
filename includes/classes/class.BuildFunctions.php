@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.BuildFunctions.php 2418 2012-11-10 16:07:52Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.BuildFunctions.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -76,10 +76,10 @@ class BuildFunctions
 	public static function getElementPrice($USER, $PLANET, $Element, $forDestroy = false, $forLevel = NULL) { 
 		global $pricelist, $resource, $reslist;
 
-       	if (in_array($Element, $reslist['fleet']) || in_array($Element, $reslist['defense'])) {
+       	if (in_array($Element, $reslist['fleet']) || in_array($Element, $reslist['defense']) || in_array($Element, $reslist['missile'])) {
 			$elementLevel = $forLevel;
 		} elseif (isset($forLevel)) {
-			$elementLevel = $forLevel - 1;
+			$elementLevel = $forLevel;
 		} elseif (isset($PLANET[$resource[$Element]])) {
 			$elementLevel = $PLANET[$resource[$Element]];
 		} elseif (isset($USER[$resource[$Element]])) {
@@ -106,7 +106,7 @@ class BuildFunctions
 				$price[$resType]	*= pow($pricelist[$Element]['factor'], $elementLevel);
 			}
 			
-			if($forLevel && (in_array($Element, $reslist['fleet']) || in_array($Element, $reslist['defense']))) {
+			if($forLevel && (in_array($Element, $reslist['fleet']) || in_array($Element, $reslist['defense']) || in_array($Element, $reslist['missile']))) {
 				$price[$resType]	*= $elementLevel;
 			}
 			
@@ -231,14 +231,18 @@ class BuildFunctions
 	
 	public static function getMaxConstructibleRockets($USER, $PLANET, $Missiles = NULL)
 	{
-		global $resource, $CONF;
+		global $resource, $CONF, $reslist;
 
-		if(!isset($Missiles)) {
-			$Missiles			= array(
-				502	=> $PLANET[$resource[502]],
-				503	=> $PLANET[$resource[503]],
-			);
+		if(!isset($Missiles))
+		{		
+			$Missiles	= array();
+			
+			foreach($reslist['missile'] as $elementID)
+			{
+				$Missiles[$elementID]	= $PLANET[$resource[$elementID]];
+			}
 		}
+		
 		$BuildArray  	  	= !empty($PLANET['b_hangar_id']) ? unserialize($PLANET['b_hangar_id']) : array();
 		$MaxMissiles   		= $PLANET[$resource[44]] * 10 * max(Config::get('silo_factor'), 1);
 

@@ -23,7 +23,7 @@
  * @copyright 2011 Slaver <slaver7@gmail.com> (Fork/2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.6.1 (2011-11-19)
- * @info $Id: class.template.php 2435 2012-11-17 15:12:16Z slaver7 $
+ * @info $Id: class.template.php 2496 2013-01-01 13:26:23Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
 
@@ -79,7 +79,7 @@ class template extends Smarty
 	
 	private function adm_main()
 	{
-		global $LNG, $CONF, $LANG, $USER;
+		global $LNG, $CONF, $USER;
 		
 		$dateTimeServer		= new DateTime("now");
 		if(isset($USER['timezone'])) {
@@ -96,7 +96,7 @@ class template extends Smarty
 			'scripts'			=> $this->script,
 			'title'				=> Config::get('game_name').' - '.$LNG['adm_cp_title'],
 			'fcm_info'			=> $LNG['fcm_info'],
-            'lang'    			=> $LANG->getUser(),
+            'lang'    			=> $LNG->getLanguage(),
 			'REV'				=> substr(Config::get('VERSION'), -4),
 			'date'				=> explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
 			'Offset'			=> $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
@@ -106,33 +106,9 @@ class template extends Smarty
 		));
 	}
 	
-	public function login_main()
-	{
-		global $USER, $CONF, $LNG, $LANG, $UNI;
-		$this->assign_vars(array(
-			'cappublic'			=> $CONF['cappublic'],
-			'servername' 		=> $CONF['game_name'],
-			'forum_url' 		=> $CONF['forum_url'],
-			'fb_active'			=> $CONF['fb_on'],
-			'fb_key' 			=> $CONF['fb_apikey'],
-			'mail_active'		=> $CONF['mail_active'],
-			'game_captcha'		=> $CONF['capaktiv'],
-			'reg_close'			=> $CONF['reg_closed'],
-			'ref_active'		=> $CONF['ref_active'],
-			'ga_active'			=> $CONF['ga_active'],
-			'ga_key'			=> $CONF['ga_key'],
-			'getajax'			=> HTTP::_GP('getajax', 0),
-			'lang'				=> $LANG->getUser(),
-			'UNI'				=> $UNI,
-			'VERSION'			=> $CONF['VERSION'],
-			'REV'				=> substr($CONF['VERSION'], -4),
-			'langs'				=> json_encode(Language::getAllowedLangs(false)),
-		));
-	}
-	
 	public function show($file)
 	{		
-		global $USER, $PLANET, $CONF, $LNG, $THEME, $LANG;
+		global $USER, $PLANET, $CONF, $LNG, $THEME;
 
 		if($THEME->isCustomTPL($file))
 			$this->setTemplateDir($THEME->getTemplatePath());
@@ -144,9 +120,6 @@ class template extends Smarty
 		} elseif(MODE === 'ADMIN') {
 			$this->setTemplateDir($tplDir[0].'adm/');
 			$this->adm_main();
-		} elseif(MODE === 'INDEX') {
-			$this->setTemplateDir($tplDir[0].'index/');
-			$this->login_main();
 		}
 
 		$this->assign_vars(array(
@@ -158,18 +131,17 @@ class template extends Smarty
 			'LNG'			=> $LNG,
 		), false);
 		
-		$this->compile_id	= $LANG->getUser();
+		$this->compile_id	= $LNG->getLanguage();
 		
 		parent::display($file);
 	}
 	
 	public function display($file)
 	{
-		global $LANG;
-		$this->compile_id	= $LANG->getUser();
+		global $LNG;
+		$this->compile_id	= $LNG->getLanguage();
 		parent::display($file);
 	}
-	
 	
 	public function gotoside($dest, $time = 3)
 	{
@@ -228,7 +200,7 @@ class template extends Smarty
     public function __set($name, $value)
     {
         $allowed = array(
-        'template_dir' => 'setTemplateDirgetTemplateDir',
+        'template_dir' => 'setTemplateDir',
         'config_dir' => 'setConfigDir',
         'plugins_dir' => 'setPluginsDir',
         'compile_dir' => 'setCompileDir',
@@ -242,5 +214,3 @@ class template extends Smarty
         }
     }
 }
-
-?>

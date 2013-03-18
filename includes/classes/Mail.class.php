@@ -25,7 +25,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0 (2012-11-31)
- * @info $Id: Mail.class.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: Mail.class.php 2535 2013-01-05 12:44:44Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
 
@@ -33,7 +33,7 @@ class Mail
 {	
 	function send($MailTarget, $MailTargetName, $MailSubject, $MailContent)
 	{		
-		$transport	= self::getSwiftTranspor();
+		$transport	= self::getSwiftTransport();
 		$mailer 	= Swift_Mailer::newInstance($transport);
 		
 		$mailFrom	= Config::get('smtp_sendmail');
@@ -50,7 +50,7 @@ class Mail
 	
 	function multiSend($MailTargets, $MailSubject, $MailContent = NULL)
 	{
-		$transport	= self::getSwiftTranspor();
+		$transport	= self::getSwiftTransport();
 		$mailer 	= Swift_Mailer::newInstance($transport);
 		
 		$mailFrom	= Config::get('smtp_sendmail');
@@ -71,7 +71,7 @@ class Mail
 		}
 	}
 	
-	function getSwiftTranspor()
+	function getSwiftTransport()
 	{
 		require_once(ROOT_PATH.'includes/libs/swift/swift_required.php');
 		

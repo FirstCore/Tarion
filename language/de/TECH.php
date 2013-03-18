@@ -21,8 +21,8 @@
  * @author Jan Kröpke <info@2moons.cc>
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: TECH.php 2418 2012-11-10 16:07:52Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: TECH.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -160,7 +160,8 @@ $LNG['tech'] = array(
 	409 => 'Gigantische Schildkuppel',
 	410 => 'Gravitonkanone',
 	411 => 'Orbitale Verteidigungsplattform',
-
+	
+	500 => 'Raketen',
 	502 => 'Abfangrakete',
 	503 => 'Interplanetarrakete',
 
@@ -398,5 +399,3 @@ $LNG['longDescription'] = array(
 	706 => 'Der Bonus ist nur temporär.',
 	707 => 'Der Bonus ist nur temporär.',	
 );
-
-?>

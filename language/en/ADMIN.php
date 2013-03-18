@@ -12,11 +12,11 @@ $LNG['adm_password']		='Password';
 $LNG['adm_absenden']		='Enter';
 $LNG['adm_password_info']	='Write your password in order to enter';
 $LNG['adm_bad_password']	='Wrong Password!';
-$LNG['404_page']			='Does not have permissions to access this page';
-$LNG['adm_cp_title']		='Panel of Administration';
+$LNG['404_page']			='You do not have permissions to access this page';
+$LNG['adm_cp_title']		='Administration Panel';
 $LNG['adm_cp_index']		='Start';
 $LNG['mu_moderation_page']	='Permissions';
-$LNG['mu_universe']			='Universs';
+$LNG['mu_universe']			='Universe';
 $LNG['adm_cp_logout']		='Back to Game';
 
 //	Miscelâneo
@@ -106,33 +106,33 @@ $LNG['ad_editor_authlevels'] ='Permissions';
 $LNG['ad_add_not_exist']		='ID does not exist!';
 
 //	Pesquisas
-$LNG['ad_add_succes'] ='The Research has been inserted successfully!';
-$LNG['ad_delete_succes'] ='The Research has been removed successfully!';
+$LNG['ad_add_tech_success'] ='The Research has been inserted successfully!';
+$LNG['ad_delete_tech_success'] ='The Research has been removed successfully!';
 $LNG['ad_research_title'] ='Research';
 $LNG['ad_research'] ='Research';
 
-//	OFICIALES - OFFICIERS - OFFIZIERE
+//	Officiais
 $LNG['ad_offi_title'] ='Officiers';
 $LNG['ad_offi'] ='Officiers';
-$LNG['ad_offi_succes_add'] ='The Officiers were entered successfully!';
-$LNG['ad_offi_succes_delete'] ='The Officiers were removed successfully!';
+$LNG['ad_add_offi_success'] ='The Officiers were entered successfully!';
+$LNG['ad_delete_offi_success'] ='The Officiers were removed successfully!';
 
 //	Recursos
-$LNG['ad_add_sucess'] ='Resources have been inserted successfully!';
-$LNG['ad_delete_sucess'] ='The Researches were removed successfully!';
+$LNG['ad_add_res_sucess'] ='Resources have been inserted successfully!';
+$LNG['ad_delete_res_sucess'] ='The Researches were removed successfully!';
 $LNG['ad_main_title'] ='Ressources and Technologies';
 
 //	Naves
 $LNG['ad_ships_title'] ='Ships';
 $LNG['ad_ships'] ='Ships';
-$LNG['ad_add_sucess_ships'] ='The ships have been uploaded successfully!';
-$LNG['ad_delete_sucess_ships'] ='The ships were removed successfully!';
+$LNG['ad_add_ships_sucess'] ='The ships have been uploaded successfully!';
+$LNG['ad_delete_ships_sucess'] ='The ships were removed successfully!';
 
 //	Defesas
 $LNG['ad_defenses_title'] ='Defences';
 $LNG['ad_defenses'] ='Defences';
-$LNG['ad_add_defenses_succes'] ='The defenses were uploaded successfully!';
-$LNG['ad_delete_defenses_succes'] ='The defenses were removed successfully!';
+$LNG['ad_add_defenses_success'] ='The defenses were uploaded successfully!';
+$LNG['ad_delete_defenses_success'] ='The defenses were removed successfully!';
 
 //	Edificios
 $LNG['ad_buildings_title'] ='Buildings';
@@ -140,8 +140,8 @@ $LNG['ad_buildings'] ='Buildings';
 $LNG['ad_planet_id'] ='ID of the planet or Moon';
 $LNG['ad_levels'] ='Level';
 $LNG['ad_count'] ='Number';
-$LNG['ad_add_succes'] ='The buildings were entered successfully!';
-$LNG['ad_delete_succes'] ='The buildings were removed successfully!';
+$LNG['ad_add_build_success'] ='The buildings were entered successfully!';
+$LNG['ad_delete_build_success'] ='The buildings were removed successfully!';
 
 // Dados Pessoais
 $LNG['ad_personal_title'] ='Edit Personal Data';
@@ -345,8 +345,8 @@ $LNG['se_per_hour'] ='per hour';
 $LNG['se_metal_production'] ='Production of Metal Basic';
 $LNG['se_crystal_production'] ='Production of Crystal Basic';
 $LNG['se_deuterium_production'] ='Production of Deuterium Basic';
-$LNG['se_several_parameters'] ='miscellaneous Paran £ m';
-$LNG['se_title_admins_protection'] ='When this function is enabled, administrators or moderators are not attacked';
+$LNG['se_several_parameters'] ='Other Parameters';
+$LNG['se_title_admins_protection'] ='When this function is enabled, administrators or moderators can not be attacked';
 $LNG['se_admin_protection'] ='Admin Game Protection';
 $LNG['se_debug_mode'] ='Debug mode';
 $LNG['se_save_parameters'] ='Save';
@@ -359,18 +359,18 @@ $LNG['se_def_cdr']						='Defense for the Debris';
 $LNG['se_ships_cdr']					='Fleet for the Debris';
 $LNG['se_def_cdr_message']				='Sets the percentage of the generated debris defenses after an attack';
 $LNG['se_ships_cdr_message']			='Sets the percentage of the generated debris fleets after an attack';
-$LNG['se_noob_protect'] 				='Protection of beginners';
+$LNG['se_noob_protect'] 				='Protection of newbies';
 $LNG['se_noob_protect2'] 				='Protection n. points';
-$LNG['se_noob_protect3'] 				='Protection Limit n. points';
+$LNG['se_noob_protect3'] 				='Newbie Point Multiply';
 $LNG['se_noob_protect_e2'] 				='Limit of points to leave them to be newbie';
-$LNG['se_noob_protect_e3'] 				='';
+$LNG['se_noob_protect_e3'] 				='You can only attack users where their points is between your points * (amount), for example *18 , it means, if you have 1000 points, you can attack users with less than 18000 points, or, if you have 50000 points, you can be attacked from users where you enter in their range points, like if a enemy or a neutral user have 20000 points, * 18 will be 360000, so you are in their range and you can be attacked by him';
 $LNG['se_recaptcha_whats']              ='What is RECAPTCHA?';
 $LNG['se_recaptcha_head']               ='RECAPTCHA';
 $LNG['se_recaptcha_desc']               ='RECAPTCHA CAPTCHA is a free service that will help block spam and bots.';
 $LNG['se_recaptcha_public']             ='Public Key:';
 $LNG['se_recaptcha_private']            ='Private Key:';
 $LNG['se_recaptcha_active']             ='Enabling RECAPTCHA';
-$LNG['se_reg_closed']					='Registo Fechado';
+$LNG['se_reg_closed']					='Closed Registration';
 $LNG['se_min_build_time']               ='Min. Construction';
 $LNG['se_trader_head']					='The settings of Merchant Fleet';
 $LNG['se_trader_ships']					='Authorized ships:';
@@ -387,6 +387,15 @@ $LNG['se_del_user_sendmail']			='Send reminder';
 $LNG['se_del_user_sendmail_info']		='Sends a reminder to users after X days without Login.';
 $LNG['se_sendmail_inactive']			='Enable email alerts';
 $LNG['se_ref']							='Referral Link';
+$LNG['se_server_colonisation_config'] 	= 'Colonization Configuration';
+$LNG['se_planets_min'] 					= 'Max planets without research';
+$LNG['se_planets_min_info'] 			= 'From the outset, the player has the opportunity to occupy the specified number of planets';
+$LNG['se_planets_tech'] 				= 'Amount max of Colonies with Astrophysics';
+$LNG['se_planets_tech_info'] 			= 'This is how many planets user can have with Astrophysics';
+$LNG['se_planets_officier'] 			= 'Maximum number of additional planet by officers';
+$LNG['se_planets_officier_info'] 		= 'Per level of the officer, the user should have a new amount of planets to colonize';
+$LNG['se_planets_per_tech'] 			= 'Additional planets per level of Astrophysics';
+$LNG['se_planets_per_tech_info'] 		= 'This is the amount of colonies unlock per level';
 $LNG['se_ref_active']					='Activate Referallink';
 $LNG['se_ref_active_info']				='Referral Link, or the invitation link gives players the opportunity to refer, or attract and invite more friends. This will give UMA suruba bonus nude for players.';
 $LNG['se_ref_bonus']					='Referral Link bonus';
@@ -395,12 +404,12 @@ $LNG['se_ref_minpoints']				='Limite de bonus';
 $LNG['se_ref_minpoints_info']			='The user came to these limit to the user receives your promotional bonus.';
 $LNG['se_ref_max_referals']				='Maximum reference';
 $LNG['se_ref_max_referals_info']		='The maximum number of recruiting players for the user.';
-$LNG['se_silo_factor']					=' Missile Silo';
+$LNG['se_silo_factor']					='Missile Silo';
 $LNG['se_silo_factor_info']				='Factor of the silo size.';
-$LNG['se_min_build_time_info']          ='Here you will s for a while at least for bearenstain. This pre laid down for 1 second.<br>If 0, it will change to disabled';
+$LNG['se_min_build_time_info']          ='If this is 1, then the minimum time of build is 1 second (if the Nanites or Robots alows beign 0 seconds (Instantly)).<br>If 0, this is disabled';
 $LNG['se_news_head']                    ='Settings of news';
 $LNG['se_news_active']                  ='Activate News';
-$LNG['se_news_limit']                   ='Max 255 characters!';
+$LNG['se_news_limit']                   ='It is allowed HTML codes like "color" , "p align=left or right" , "b" "i" "u" "del"';
 $LNG['se_news_info']                    ='If disabled, the news no longer be visible in the overview.';
 $LNG['se_news']                         ='News';
 $LNG['se_verfiy_mail']                  ='The system of checking email';
@@ -496,6 +505,7 @@ $LNG['se_dst_sel'][0]                                   ='Yes';
 $LNG['se_dst_sel'][1]                                   ='No';
 $LNG['se_dst_sel'][2]                                   ='Auto';
 $LNG['se_max_dm_missions']				='Maximum parallel missions of DM';
+$LNG['se_alliance_create_min_points']   = 'Minimum number of points, to form an Alliance';
 $LNG['se_disclamerAddress']				= 'Address';
 $LNG['se_disclamerPhone']				= 'Phone number';
 $LNG['se_disclamerMail']				= 'Email address';
@@ -558,7 +568,7 @@ $LNG['sb_top_memory']					='Peak memory: %p KB / max. %m KB <br>';
 $LNG['sb_final_memory']					='Memory consumed by the end: %e KB / max. %m KB<br>';
 $LNG['sb_start_memory']					='Memory consumed at the beginning: %i KB / max. %m KB<br>';
 $LNG['sb_stats_update']					='Stats updated in: %t segundos<br>';
-$LNG['sb_stats_updated']				='Updated stats. <br>Resumir:<br>';
+$LNG['sb_stats_updated']				='Updated stats. <br>Resuming:<br>';
 $LNG['sb_sql_counts']			        ='SQL Querys: %d';
 
 //###########################################################//
@@ -572,21 +582,21 @@ $LNG['ul_sure_you_want_dlte']		='Are you sure that you want to remove?';
 //---------------	Menu Esquerdo	------------------------//
 $LNG['mu_general'] 						='General';
 $LNG['mu_connected'] 					='Online';
-$LNG['mu_settings'] 					='Games Configuration';
+$LNG['mu_settings'] 					='Server Configuration';
 $LNG['mu_unisettings']                  ='Universe Configuration';
 $LNG['mu_global_message'] 				='Global Message';
 $LNG['mu_users_settings'] 				='Edit menu';
 $LNG['mu_add_delete_resources'] 		='Edit Accounts';
-$LNG['mu_stats_options'] 				='Options of stats';
+$LNG['mu_stats_options'] 				='Statistics Configuration';
 $LNG['mu_manage_users'] 				='Manage users';
-$LNG['mu_ban_options'] 					='Ban Options';
+$LNG['mu_ban_options'] 					='Ban System';
 $LNG['mu_moon_options'] 				='Moon Options';
-$LNG['mu_observation'] 					='Observation';
-$LNG['mu_flying_fleets'] 				='Fleets in flight';
-$LNG['mu_user_list'] 					='List of players';
-$LNG['mu_moon_list'] 					='List of Moons';
-$LNG['mu_mess_list']					='List of messages';
-$LNG['mu_planet_list'] 					='List of Planets';
+$LNG['mu_observation'] 					='Game';
+$LNG['mu_flying_fleets'] 				='Flying Fleets';
+$LNG['mu_user_list'] 					='Player List';
+$LNG['mu_moon_list'] 					='Moon List';
+$LNG['mu_mess_list']					='Message List';
+$LNG['mu_planet_list'] 					='Planet List';
 $LNG['mu_error_list'] 					='Errors in Data Base';
 $LNG['mu_active_planets'] 				='Active Planets';
 $LNG['mu_tools'] 						='Tools';
@@ -597,14 +607,14 @@ $LNG['mu_mpu_confirmation'] 			='The Updater is automatico points, this allows y
 $LNG['mu_search_page'] 					='Advanced search';
 $LNG['mu_info_account_page']	 		='Information Account';
 $LNG['mu_planets_options'] 				='Planets Options';
-$LNG['mu_user_logs']				    ='Registry Log';
+$LNG['mu_user_logs']				    ='Admin Log';
 $LNG['mu_support']                      ='Support Tickets';
 $LNG['mu_chat']                         ='Chat Configuration';
 $LNG['mu_module']                       ='Modules';
 $LNG['mu_mod_update']              		='Checking version of MOD';
 $LNG['mu_fb_options'] 					='Registration by Facebook';
 $LNG['mu_ts_options']                   ='Teamspeak Options';
-$LNG['mu_game_info']                    ='Info';
+$LNG['mu_game_info']                    ='Information';
 $LNG['mu_vaild_users']				    ='User activity';
 $LNG['mu_news']					        ='News';
 $LNG['mu_multiip_page']					='Multiple IPs'; 
@@ -614,6 +624,7 @@ $LNG['mu_cronjob']					= 'Cronjobs';
 $LNG['mu_logs']						= 'Admin Log';
 $LNG['mu_giveaway']					= 'Giveaways';
 $LNG['mu_disclamer']				= 'Contact settings';
+$LNG['mu_dump']						= 'Database Backup';
 
 $LNG['vt_error']					='Hashfile is not available! - Run Update!';
 $LNG['vt_fail']						='Changed Files';
@@ -845,7 +856,7 @@ $LNG['se_search_info']		            ='Search';
 $LNG['se_asc_desc']		                ='ASC / DESC';
 $LNG['se_search_order']	                ='Sort';
 $LNG['se_search_edit']		            ='Edit';
-$LNG['se_delete_succes_p']	            ='Delete with sucess';
+$LNG['se_delete_succes_p']	            ='Delete with success';
 $LNG['se_confirm_planet']	            ='The planet chosen will be completely erased, even being the main planet or colonia, you want to continue?. Name of the planet:';
 
 // Pesquisa na tabela de Utilizadores
@@ -896,6 +907,13 @@ $LNG['new_creator_title_l']	            ='Create/Delete Moons';
 $LNG['new_creator_coor']		        ='Coordinates';
 $LNG['new_creator_go_back']	            ='[ Return to the menu ]';
 $LNG['new_creator_refresh']	            ='[ Refresh ]';
+$LNG['uni_reg']				= 'Universe';
+$LNG['user_reg']			= 'Name';
+$LNG['pass_reg']			= 'Password';
+$LNG['pass2_reg']			= 'Password (2nd time)';
+$LNG['email_reg']			= 'Email';
+$LNG['email2_reg']			= 'Email (2nd time)';
+$LNG['lang_reg']			= 'Language';
 
 //	Usários
 $LNG['new_title']			='Create new player';
@@ -1202,7 +1220,8 @@ $LNG['cronName']['daily']			= 'Daily tasks';
 $LNG['cronName']['cleaner']			= 'Delete old data';
 $LNG['cronName']['inactive']		= 'Delete inactive';
 $LNG['cronName']['teamspeak']		= 'Teamspeak data update';
-
+$LNG['cronName']['tracking']		= 'Send global server statistics';
+$LNG['cronName']['databasedump']	= 'Database backup';
 
 $LNG['cronjob_id']					= 'ID';
 $LNG['cronjob_name']				= 'Name';
@@ -1280,4 +1299,10 @@ $LNG['supp_admin_answer'] 					='Administrator response';
 $LNG['supp_player_write'] 					='%s written on %s';
 $LNG['supp_player_answer'] 					='Player response';
 
-?>
+// SQL-Dumper
+$LNG['du_header']					= 'Database Backup';
+$LNG['du_submit']					= 'Submit';
+$LNG['du_select_all_tables']		= 'All Tables';
+$LNG['du_choose_tables']			= 'Select tables';
+$LNG['du_success']					= 'Backup created successfully! File: %s';
+$LNG['du_not_tables_selected']		= 'You have no tables selected to backup!';

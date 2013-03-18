@@ -24,16 +24,16 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0 (2012-11-31)
- * @info $Id: class.Session.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: class.Session.php 2618 2013-03-11 19:36:08Z slaver7 $
  * @link http://2moons.cc/
  */
 
 class Session
 {
 	private static $obj;
+	private static $isInit = false;
 	
-	function __construct()
-	{
+	static function init() {
 		ini_set('session.use_cookies', '1');
 		ini_set('session.use_only_cookies', '1');
 		ini_set('session.use_trans_sid', 0);
@@ -46,13 +46,20 @@ class Session
 		ini_set('session.bug_compat_42', '0');
 		ini_set('session.cookie_httponly', true);
 		
-		//session_set_cookie_params(SESSION_LIFETIME, HTTP_ROOT, HTTP_HOST, HTTPS, true);
-		
 		$HTTP_ROOT = MODE === 'INSTALL' ? dirname(HTTP_ROOT) : HTTP_ROOT;
 		
 		session_set_cookie_params(SESSION_LIFETIME, $HTTP_ROOT, NULL, HTTPS, true);
 		session_cache_limiter('nocache');
 		session_name('2Moons');
+		self::$isInit	= true;
+	}
+	
+	function __construct()
+	{
+		if(self::$isInit === false)
+		{
+			self::init();
+		}
 	}
 	
 	static function redirectCode($Code)
@@ -99,6 +106,7 @@ class Session
 		if(!isset($_SESSION)) {
 			session_start();
 		}
+		
 		return !empty($_SESSION['id']);
 	}
 	

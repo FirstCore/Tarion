@@ -25,7 +25,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0 (2012-11-31)
- * @info $Id: HTTPRequest.class.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: HTTPRequest.class.php 2607 2013-02-04 14:48:53Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
 
@@ -42,14 +42,11 @@ class HTTPRequest
 	
 	function send()
 	{
-		global $gameConfig;
-		
 		if(function_exists("curl_init"))
 		{
 			$this->ch	= curl_init($this->url);
 			curl_setopt($this->ch, CURLOPT_HTTPGET, true);
 			curl_setopt($this->ch, CURLOPT_AUTOREFERER, true);
-			curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
 			curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($this->ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; 2Moons/".Config::get('VERSION')."; +http://2moons.cc)");
 			curl_setopt($this->ch, CURLOPT_HTTPHEADER, array(
@@ -57,7 +54,6 @@ class HTTPRequest
 				"Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3",
 				"Accept-Language: de-DE,de;q=0.8,en-US;q=0.6,en;q=0.4",
 			));
-			
 			
 			$this->content	= curl_exec($this->ch);
 			curl_close($this->ch);

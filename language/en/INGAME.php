@@ -19,7 +19,7 @@ $LNG['invalid_action']						= 'Action Invalidated!!';
 $LNG['type_mission'][1]  					= 'Attack';
 $LNG['type_mission'][2]  					= 'ACS - Attack on cooperation';
 $LNG['type_mission'][3]  					= 'Transport';
-$LNG['type_mission'][4]  					= 'Station';
+$LNG['type_mission'][4]  					= 'Deploy';
 $LNG['type_mission'][5]  					= 'Transfer';
 $LNG['type_mission'][6]  					= 'Spying';
 $LNG['type_mission'][7]  					= 'Colonize';
@@ -55,6 +55,7 @@ $LNG['tn_delete_mode']						= 'The account at %s will be automatically deleted!'
 
 //----------------------------------------------------------------------------//
 // Menu
+$LNG['lm_changelog']						= 'Changelog';
 $LNG['lm_overview']							= 'Overview';
 $LNG['lm_galaxy']							= 'Galaxy';
 $LNG['lm_empire']							= 'Empire';
@@ -134,11 +135,11 @@ $LNG['ov_userbanner']						= "Player's Banner";
 $LNG['ov_userrank_info']					= '%s (%s <a href="game.php?page=statistics&amp;range=%d">%d</a> %s %s)';
 $LNG['ov_teamspeak_not_online']				= 'The Teamspeak server not active this';
 $LNG['ov_teamspeak']						= 'Teamspeak';
-$LNG['ov_teamspeak_v2']						= '<a href="teamspeak://%s:%s?nickname=%s" title="Teamspeak Connect">Connect</a> &bull; Online: %d/%d &bull; Channels: %d &bull; Traffic ges.: %s MB';
-$LNG['ov_teamspeak_v3']						= '<a href="ts3server://%s?port=%d&amp;nickname=%s&amp;password=%s" title="Teamspeak Connect">Connect</a>&nbsp;&bull;&nbsp;Online: %d/%d &bull; Channels: %d &bull; Traffic ges.: %s MB';
+$LNG['ov_teamspeak_connect']				= 'Connect';
+$LNG['ov_teamspeak_online']					= 'Online';
 $LNG['ov_closed']							= 'The universe is currently disabled';
 $LNG['ov_reflink']							= 'Recruits';
-$LNG['ov_noreflink']						= 'At the moment, not recrutaste some player.';
+$LNG['ov_noreflink']						= 'At the moment, you did not recruited any player.';
 $LNG['ov_chat_online']						= 'Players in chat:';
 
 //----------------------------------------------------------------------------//
@@ -152,9 +153,9 @@ $LNG['gl_vacation']							= 'Vacation mode';
 $LNG['gl_banned']							= 'Banned / Suspended';
 $LNG['gl_inactive_seven']					= '7 Inactive days';
 $LNG['gl_inactive_twentyeight']				= '28 Inactive days';
-$LNG['gl_short_enemy']						= 'E';
-$LNG['gl_short_friend']						= 'F';
-$LNG['gl_short_member']						= 'M';
+$LNG['gl_short_enemy']						= '';
+$LNG['gl_short_friend']						= '';
+$LNG['gl_short_member']						= '';
 $LNG['gl_short_strong']						= 'S';
 $LNG['gl_short_newbie']						= 'N';
 $LNG['gl_short_vacation']					= 'VM';
@@ -298,7 +299,6 @@ $LNG['fl_hours']                            = 'Hours';
 $LNG['fl_resources_left']				    = 'Capacity avaliable';
 $LNG['fl_all_resources']			        = 'All resources';
 $LNG['fl_multi_alarm']						= 'Multi alarm!';
-$LNG['fl_admins_cannot_be_attacked']			= 'The Admins can not be attacked';
 $LNG['fl_empty_target']						= 'Without mission available (the planet exist?)';
 $LNG['fl_expedition_alert_message']		    = 'Attention! Explorations are dangerous missions, you can lose your fleet!';
 $LNG['fl_dm_alert_message']                 = 'Beware, if in %s %s was found, destroyed the fleets!';
@@ -353,7 +353,6 @@ $LNG['fl_target_not_exists']				= 'Target planet does not exist!';
 $LNG['fl_only_planets_colonizable']			= 'Only planets can be colonized.';
 $LNG['fl_player_is_noob']					= 'Player is in the Noob Protection!';
 $LNG['fl_player_is_strong']					= 'Player is too strong!';
-$LNG['fl_tech_for_position_required']		= 'You need %s level %d, in order to occupy this position!';
 $LNG['fl_no_hold_depot']					= 'No Alliance Depot is located on the target.';
 $LNG['fl_not_enough_deuterium']				= 'Not enough deuterium available.';
 $LNG['fl_not_enough_space']					= 'You have not enough cargo space available.';
@@ -456,6 +455,7 @@ $LNG['tt_lvl']								= 'Level ';
 
 //----------------------------------------------------------------------------//
 // Infos
+$LNG['in_jump_gate_no_target']				= 'No target jump available.';
 $LNG['in_jump_gate_done']					='The jump portal was used, you can use it in:';
 $LNG['in_jump_gate_error_data']			    = 'Error, coordinates to jump are not correct!';
 $LNG['in_jump_gate_not_ready_target']		= 'The portal is not ready in destination Moon, will be ready in ';
@@ -538,6 +538,8 @@ $LNG['mg_read_marked']						= 'Mark selected messages as read';
 $LNG['mg_read_type_all']					= 'Mark all messages of this type as read';
 $LNG['mg_read_all']							= 'Mark all messages as read';
 $LNG['mg_confirm']							= 'Confirm';
+$LNG['mg_receiver_block_pm']				= 'The receiver block private messages.';
+
 
 //----------------------------------------------------------------------------//
 // Aliança
@@ -605,6 +607,8 @@ $LNG['al_ok']								= 'OK';
 $LNG['al_num']								= 'ID';
 $LNG['al_member']							= 'Name';
 $LNG['al_request_from_user']                = 'The requests of players';
+$LNG['al_request_register_time']            = 'Registered at';
+$LNG['al_request_last_onlinetime']          = 'Last activity';
 $LNG['al_message']							= 'Message';
 $LNG['al_position']							= 'Position';
 $LNG['al_points']							= 'Points';
@@ -657,6 +661,8 @@ $LNG['al_manage_ranks']						= 'Configure rights';
 $LNG['al_manage_members']					= 'Manage members';
 $LNG['al_manage_change_tag']				= 'Change Tag of Alliance';
 $LNG['al_manage_change_name']				= 'Change name of Alliance';
+$LNG['al_set_max_members']					= 'Maximum number of members';
+$LNG['al_manage_request_min_points']        = 'Minimum Points';
 $LNG['al_texts']							= 'Options of text';
 $LNG['al_manage_options']					= 'Options';
 $LNG['al_manage_image']						= 'Image of Alliance';
@@ -664,6 +670,7 @@ $LNG['al_manage_requests']					= 'Applications';
 $LNG['al_manage_diplo']                    	= 'Diplomacy of Alliance';
 $LNG['al_requests_not_allowed']			    = 'Impossible (Alliance closed)';
 $LNG['al_requests_allowed']				    = 'Possible (Alliance open)';
+$LNG['al_requests_min_points']              = ' %s points';
 $LNG['al_manage_founder_rank']				= 'Position of the founder';
 $LNG['al_configura_ranks']					= 'Setting rights';
 $LNG['al_create_new_rank']					= 'Create new rank';
@@ -687,10 +694,14 @@ $LNG['al_tfmetall']     					= 'Debris of Metal';
 $LNG['al_tfkristall']   					= 'Debris of Crystal';
 $LNG['al_view_stats']						= 'Statistics of battle public?';
 $LNG['al_view_diplo']						= 'Diplomacy is public?';
+$LNG['al_view_events']						= 'Viewing events';
 $LNG['al_memberlist_min']					= 'min';
 $LNG['al_memberlist_on']					= 'Online';
 $LNG['al_memberlist_off']					= 'Offline';
 $LNG['al_diplo']							= 'Diplomacy';
+$LNG['al_no_diplo']							= '-';
+$LNG['al_events']							= 'Events';
+$LNG['al_no_events']						= 'There are currently no events';
 $LNG['al_diplo_level'][1]                   = 'Wing';
 $LNG['al_diplo_level'][2]                   = 'Alliance';
 $LNG['al_diplo_level'][3]                   = 'Trade Pact';
@@ -700,6 +711,7 @@ $LNG['al_diplo_level'][6]					= 'Secret Alliance';
 $LNG['al_diplo_no_entry']                   = '- There is no Pact -';
 $LNG['al_diplo_no_accept']                  = '- Without applications available -';
 $LNG['al_diplo_accept']                     = 'Applications';
+$LNG['al_diplo_exists']						= 'There is already a valid or not yet accepted diplomatic relationship with the Alliance "%s"!';
 $LNG['al_diplo_accept_send']                = 'Output requests';
 $LNG['al_diplo_create']                     = 'Create new Pact.';
 $LNG['al_diplo_create_done']                = 'The Pact created successfully.';
@@ -738,6 +750,7 @@ $LNG['al_rank_desc']['KICK']				= 'Can deleting members';
 $LNG['al_rank_desc']['DIPLOMATIC']			= 'Can manage the Diplomacy';
 $LNG['al_rank_desc']['RANKS']				= 'Can configure the Ranks';
 $LNG['al_rank_desc']['MANAGEUSERS']			= 'Can manage members';
+$LNG['al_rank_desc']['EVENTS']			= 'Can see events';
 
 //----------------------------------------------------------------------------//
 // Lista de Amigos
@@ -902,6 +915,7 @@ $LNG['op_dst_mode_sel'][0]					= 'Yes';
 $LNG['op_dst_mode_sel'][1]					= 'No';
 $LNG['op_dst_mode_sel'][2]					= 'Automatic';
 $LNG['op_timezone']							= 'Time zone';
+$LNG['op_block_pm']							= 'Block private messages';
 
 //----------------------------------------------------------------------------//
 // Lista de Jogadores Banidos
@@ -1079,7 +1093,7 @@ $LNG['ti_status_closed'] 					= 'Closed';
 $LNG['ti_status_answer'] 					= 'Response';
 $LNG['ti_admin_open'] 						= 'The ticket has been opened!';
 $LNG['ti_admin_close'] 						= 'The ticket was closed!';
-
+$LNG['ti_error_closed'] 					= 'No answer can be created on this ticket, because it was already closed!';
 $LNG['ti_create_info']						= '<p>Please, when creating a support Ticket, describes and explains what is your issue with the maximum detail possible!</p>
 <p>A detailed description of what you want to ask, shortens the duration of time of resolution and avoids the waste of time on both sides</p>
 <p>For issues related to accounts, specify facilitates the assignment of problem and also shortens the time.</p>';
@@ -1119,7 +1133,7 @@ $LNG['bs_cancel']   						= "Reset";
 $LNG['bs_wait']   							= "Wait 10 seconds for the next simulation";
 $LNG['bs_acs_slot']   						= 'ACS-Slot';
 $LNG['bs_add_acs_slot']   					= 'Add ACS-Slot';
-
+$LNG['bs_reset']							= 'Reset';
 //----------------------------------------------------------------------------//
 // Mercador de Naves
 
@@ -1141,5 +1155,3 @@ $LNG['lo_continue']							= 'Click here not to wait';
 
 //----------------------------------------------------------------------------//
 
-
-?>

@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2011 Jan Kröpke
+ *  Copyright (C) 2011 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
  * @copyright 2009 Lucky
- * @copyright 2011 Jan Kröpke <info@2moons.cc>
+ * @copyright 2011 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.0 (2011-12-10)
- * @info $Id: TeamSpeakCronjob.class.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: TeamSpeakCronjob.class.php 2505 2013-01-01 16:08:08Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
 
@@ -31,34 +31,7 @@ class TeamSpeakCronjob
 {
 	function run()
 	{
-		global $CONF, $db, $LNG, $LANG;
-		
-		if ($CONF['ts_modon'] != 1)
-			return;
-		
-		switch($CONF['ts_version'])
-		{
-			case 2:
-				include_once(GAMEDIR.'includes/libs/teamspeak/class.teamspeak2.php');
-				$ts = new cyts();
-				
-				if($ts->connect($CONF['ts_server'], $CONF['ts_tcpport'], $CONF['ts_udpport'], $CONF['ts_timeout'])) {
-					file_put_contents(GAMEDIR.'cache/teamspeak_cache.php', serialize(array($ts->info_serverInfo(), $ts->info_globalInfo())));
-					$ts->disconnect();
-				}
-			break;
-			case 3:
-				require_once(GAMEDIR . "includes/libs/teamspeak/class.teamspeak3.php");
-				$tsAdmin 	= new ts3admin($CONF['ts_server'], $CONF['ts_udpport'], $CONF['ts_timeout']);
-				$Active		= $tsAdmin->connect();
-				if($Active['success']) {
-					$tsAdmin->selectServer($CONF['ts_tcpport'], 'port', true);
-					$tsAdmin->login($CONF['ts_login'], $CONF['ts_password']);
-					file_put_contents(GAMEDIR.'cache/teamspeak_cache.php', serialize($tsAdmin->serverInfo()));
-					$tsAdmin->logout();
-				}
-			break;
-		}
+		$GLOBALS['CACHE']->add('teamspeak', 'TeamspeakBuildCache');
+		$GLOBALS['CACHE']->flush('teamspeak');
 	}
 }
-?>

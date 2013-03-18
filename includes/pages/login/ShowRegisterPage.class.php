@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowRegisterPage.class.php 2421 2012-11-11 11:53:35Z slaver7 $
+ * @info $Id: ShowRegisterPage.class.php 2496 2013-01-01 13:26:23Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -277,7 +277,7 @@ class ShowRegisterPage extends AbstractPage
 		{
 			require(ROOT_PATH.'includes/classes/Mail.class.php');
 			$MailSubject 	= t('registerMailVertifyTitle');
-			$MailRAW		= $GLOBALS['LANG']->getMail('email_vaild_reg');
+			$MailRAW		= $GLOBALS['LNG']->getTemplate('email_vaild_reg');
 			$MailContent	= str_replace(array(
 				'{USERNAME}',
 				'{PASSWORD}',

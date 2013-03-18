@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: MissionCaseExpedition.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: MissionCaseExpedition.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -41,8 +41,8 @@ class MissionCaseExpedition extends MissionFunctions
 	
 	function EndStayEvent()
 	{
-		global $pricelist, $reslist, $LANG;
-		$LNG			= $LANG->GetUserLang($this->_fleet['fleet_owner']);
+		global $pricelist, $reslist;
+		$LNG	= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
 
         $expeditionPoints       = array();
 
@@ -125,7 +125,7 @@ class MissionCaseExpedition extends MissionFunctions
 					$Message	= $LNG['sys_expe_found_dm_1_'.mt_rand(1,5)];
 				} elseif(0 < $FindSize && 10 >= $FindSize) {
 					$Size		= mt_rand(301, 600);
-					$Message	= $LNG['sys_expe_found_dm_2_'.mt_rand(1,4)];
+					$Message	= $LNG['sys_expe_found_dm_2_'.mt_rand(1,3)];
 				} elseif(0 == $FindSize) {
 					$Size	 	= mt_rand(601, 3000);
 					$Message	= $LNG['sys_expe_found_dm_3_'.mt_rand(1,2)];
@@ -134,7 +134,6 @@ class MissionCaseExpedition extends MissionFunctions
 				$this->UpdateFleet('fleet_resource_darkmatter', $this->_fleet['fleet_resource_darkmatter'] + $Size);
 			break;
 			case 3:
-			default:
 				$FindSize   = mt_rand(0, 100);
                 $Size       = 0;
                 $Message    = "";
@@ -158,8 +157,7 @@ class MissionCaseExpedition extends MissionFunctions
 				
 				$FoundShipMess	= "";	
 				$NewFleetArray 	= "";
-
-				$LNG			+= $LANG->GetUserLang($this->_fleet['fleet_owner'], array('TECH'));
+				
 				$Found			= array();
 				foreach($reslist['fleet'] as $ID) 
 				{
@@ -181,6 +179,10 @@ class MissionCaseExpedition extends MissionFunctions
 						break;
 				}
 				
+				if (empty($Found)) {
+					$FoundShipMess .= '<br><br>'.$LNG['sys_expe_found_ships_nothing'];
+				}
+
 				foreach($fleetArray as $ID => $Count)
 				{
 					if(!empty($Found[$ID]))
@@ -215,14 +217,12 @@ class MissionCaseExpedition extends MissionFunctions
 					$Rand	= array(4,3,2);
 					$DefenderFleetArray	= "205,5;215,3;213,2;";
 				}
-
-				$LNG        += $LANG->GetUserLang($this->_fleet['fleet_owner'], array('L18N'));
 			
 				$messageHTML	= <<<HTML
 <div class="raportMessage">
 <table>
 <tr>
-<td colspan="2"><a href="CombatReport.php?raport=%s" target="_blank"><span class="%s">%s %s</span></a></td>
+<td colspan="2"><a href="CombatReport.php?raport=%s" target="_blank"><span class="%s">%s %s (%s)</span></a></td>
 </tr>
 <tr>
 <td>%s</td><td><span class="%s">%s: %s</span>&nbsp;<span class="%s">%s: %s</span></td>
@@ -381,7 +381,7 @@ HTML;
 				$raportData	= GenerateReport($combatResult, $raportInfo);
 			
 				$raportID	= md5(uniqid('', true).TIMESTAMP);
-				$sqlQuery	= "INSERT INTO ".RW." SET rid = '".$raportID."', raport = '".serialize($raportData)."', time = '".$this->_fleet['fleet_start_time']."';";
+				$sqlQuery	= "INSERT INTO ".RW." SET rid = '".$raportID."', raport = '".serialize($raportData)."', time = '".$this->_fleet['fleet_start_time']."', attacker = '".$this->_fleet['fleet_owner']."';";
 				$GLOBALS['DATABASE']->query($sqlQuery);
 			
 				switch($combatResult['won'])
@@ -410,6 +410,7 @@ HTML;
 						$this->_fleet['fleet_end_system'],
 						$this->_fleet['fleet_end_planet']
 					),
+					$LNG['type_planet_short'][$this->_fleet['fleet_end_type']],
 					$LNG['sys_lost'],
 					$attackClass,
 					$LNG['sys_attack_attacker_pos'],
@@ -469,12 +470,9 @@ HTML;
 	
 	function ReturnEvent()
 	{
-		global $LANG;
-		$LNG			= $LANG->GetUserLang($this->_fleet['fleet_owner']);
-		$Message 		= sprintf($LNG['sys_expe_back_home'], $LNG['tech'][901], pretty_number($this->_fleet['fleet_resource_metal']), $LNG['tech'][902], pretty_number($this->_fleet['fleet_resource_crystal']),  $LNG['tech'][903], pretty_number($this->_fleet['fleet_resource_deuterium']), $LNG['tech'][921], pretty_number($this->_fleet['fleet_resource_darkmatter']));
+		$LNG		= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
+		$Message 	= sprintf($LNG['sys_expe_back_home'], $LNG['tech'][901], pretty_number($this->_fleet['fleet_resource_metal']), $LNG['tech'][902], pretty_number($this->_fleet['fleet_resource_crystal']),  $LNG['tech'][903], pretty_number($this->_fleet['fleet_resource_deuterium']), $LNG['tech'][921], pretty_number($this->_fleet['fleet_resource_darkmatter']));
 		SendSimpleMessage($this->_fleet['fleet_owner'], 0, $this->_fleet['fleet_end_time'], 15, $LNG['sys_mess_tower'], $LNG['sys_expe_report'], $Message);
 		$this->RestoreFleet();
 	}
 }
-
-?>

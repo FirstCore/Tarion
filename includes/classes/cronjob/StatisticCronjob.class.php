@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2011 Jan Kröpke
+ *  Copyright (C) 2011 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
  * @copyright 2009 Lucky
- * @copyright 2011 Jan Kröpke <info@2moons.cc>
+ * @copyright 2011 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.0 (2011-12-10)
- * @info $Id: StatisticCronjob.class.php 2461 2012-11-24 16:00:50Z slaver7 $
+ * @info $Id: StatisticCronjob.class.php 2490 2012-12-27 16:21:07Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
 
@@ -40,4 +40,3 @@ class StatisticCronjob
 		));
 	}
 }
-?>

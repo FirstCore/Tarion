@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.FleetFunctions.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.FleetFunctions.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -77,7 +77,7 @@ class FleetFunctions
 	
 	public static function getExpeditionLimit($USER)
 	{
-		return floor(sqrt($USER[$GLOBALS['resoruce'][124]]));
+		return floor(sqrt($USER[$GLOBALS['resource'][124]]));
 	}
 	
 	public static function getDMMissionLimit($USER)
@@ -122,6 +122,14 @@ class FleetFunctions
 		}
 		
 		return max($SpeedFactor, MIN_FLEET_TIME);
+	}
+ 
+	public static function GetMIPDuration($startSystem, $targetSystem)
+	{
+		$Distance = abs($startSystem - $targetSystem);
+		$Duration = max(round((30 + 60 * $Distance) / self::GetGameSpeedFactor()), MIN_FLEET_TIME);
+		
+		return $Duration;
 	}
 
 	public static function GetGameSpeedFactor()
@@ -261,6 +269,7 @@ class FleetFunctions
 						  fleet_end_stay = ".TIMESTAMP.",
 						  fleet_end_time = ".$fleetEndTime.", 
 						  fleet_mess = 1,
+						  hasCanceled = 1,
 						  time = ".$fleetEndTime."
 						  WHERE ".$sqlWhere." = ".$FleetID." AND fleet_id = fleetID;
 						  UPDATE ".LOG_FLEETS." SET
@@ -360,11 +369,12 @@ class FleetFunctions
 		$fleetData		= array();
 		$planetQuery	= "";
 		foreach($fleetArray as $ShipID => $ShipCount) {
-			$fleetData[]	= $ShipID.','.$ShipCount;
-			$planetQuery[]	= $resource[$ShipID]." = ".$resource[$ShipID]." - ".$ShipCount;
+			$fleetData[]	= $ShipID.','.floattostring($ShipCount);
+			$planetQuery[]	= $resource[$ShipID]." = ".$resource[$ShipID]." - ".floattostring($ShipCount);
 		}
 		
 		$SQL	= "LOCK TABLE ".LOG_FLEETS." WRITE, ".FLEETS_EVENT." WRITE, ".FLEETS." WRITE, ".PLANETS." WRITE;
+				   UPDATE ".PLANETS." SET ".implode(", ", $planetQuery)." WHERE id = ".$fleetStartPlanetID.";
 				   INSERT INTO ".FLEETS." SET
 				   fleet_owner              = ".$fleetStartOwner.",
 				   fleet_target_owner       = ".$fleetTargetOwner.",
@@ -422,9 +432,8 @@ class FleetFunctions
 				   fleet_group              = ".$fleetGroup.",
 				   fleet_target_obj         = ".$missleTarget.",
 				   start_time               = ".TIMESTAMP.";
-				   UPDATE ".PLANETS." SET ".implode(", ", $planetQuery)." WHERE id = ".$fleetStartPlanetID.";
 				   UNLOCK TABLES;";
+				   
 		$GLOBALS['DATABASE']->multi_query($SQL);
 	}
 }
-?>

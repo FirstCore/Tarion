@@ -7,7 +7,6 @@ function updateVars()
 	dataFlyTime = GetDuration();
 	dataFlyConsumption = GetConsumption();
 	dataFlyCargoSpace = storage();
-	dataFlyTime = dataFlyTime * data.fleetspeedfactor
 	refreshFormData();
 }
 
@@ -32,7 +31,7 @@ function GetDistance() {
 
 function GetDuration() {
 	var sp = document.getElementsByName("speed")[0].value;
-	return Math.max(Math.round((3500 / (sp * 0.1) * Math.pow(dataFlyDistance * 10 / data.maxspeed, 0.5) + 10) / data.gamespeed), 5);
+	return Math.max(Math.round((3500 / (sp * 0.1) * Math.pow(dataFlyDistance * 10 / data.maxspeed, 0.5) + 10) / data.gamespeed) * data.fleetspeedfactor, data.fleetMinDuration);
 }
 
 function GetConsumption() {
@@ -158,10 +157,9 @@ function maxShip(id) {
 
 function maxShips() {
 	var id;
-	for (i = 200; i < 250; i++) {
-		id = "ship" + i;
-		maxShip(id);
-	}
+	$('input[name^="ship"]').each(function() {
+		maxShip($(this).attr('name'));
+	})
 }
 
 
@@ -174,10 +172,9 @@ function noShip(id) {
 
 function noShips() {
 	var id;
-	for (i = 200; i < 250; i++) {
-		id = "ship" + i;
-		noShip(id);
-	}
+	$('input[name^="ship"]').each(function() {
+		noShip($(this).attr('name'));
+	});
 }
 
 function setNumber(name, number) {

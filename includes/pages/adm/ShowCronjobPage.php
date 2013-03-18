@@ -21,8 +21,8 @@
  * @author FC92
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: ShowCronjobPage.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: ShowCronjobPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -91,15 +91,15 @@ function ShowCronjobEdit()
 	
 	if ($post_name == '')
 		$error_msg[] = $LNG['cronjob_error_name'];
-	if (!$post_min)
+	if ($post_min === false)
 		$error_msg[] = $LNG['cronjob_error_min'];
-	if (!$post_hours)
+	if ($post_hours === false)
 		$error_msg[] = $LNG['cronjob_error_hours'];
-	if (!$post_month)
+	if ($post_month === false)
 		$error_msg[] = $LNG['cronjob_error_month'];
-	if (!$post_dow)
+	if ($post_dow === false)
 		$error_msg[] = $LNG['cronjob_error_dow'];
-	if (!$post_dom)
+	if ($post_dom === false)
 		$error_msg[] = $LNG['cronjob_error_dom'];
 	if ($post_class == '')
 		$error_msg[] = $LNG['cronjob_error_class'];

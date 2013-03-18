@@ -1,9 +1,5 @@
 {block name="title" prepend}{$LNG.lm_overview}{/block}
-{block name="script" append}
-<script type="text/javascript">
-buildEndTime	= {$buildtime};
-</script>
-{/block}
+{block name="script" append}{/block}
 {block name="content"}
 <table class="table519">
 	<tr>
@@ -33,9 +29,10 @@ buildEndTime	= {$buildtime};
 		<td colspan="2">{foreach $chatOnline as $Name}{if !$Name@first},&nbsp;{/if}<a href="?page=chat">{$Name}</a>{/foreach}</td>
 	</tr>
 	{/if}
-	{if $Teamspeak}
+	{if $teamspeakData !== false}
 	<tr>
-		<td>{$LNG.ov_teamspeak}</td><td colspan="3">{$Teamspeak}</td>
+		<td>{$LNG.ov_teamspeak}</td>
+		<td colspan="3">{if $teamspeakData.error}{$teamspeakData.error}{else}<a href="{$teamspeakData.url}">{$LNG.ov_teamspeak_connect}</a> &bull; {$LNG.ov_teamspeak_online}: {$teamspeakData.current}/{$teamspeakData.max}{/if}</td>
 	</tr>
 	{/if}
 	<tr>
@@ -43,13 +40,18 @@ buildEndTime	= {$buildtime};
 	</tr>
 	{foreach $fleets as $index => $fleet}
 	<tr>
-		<td id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}" data-fleet-time="{$fleet.resttime}">-</td>
+		<td id="fleettime_{$index}" class="fleets" data-fleet-end-time="{$fleet.returntime}" data-fleet-time="{$fleet.resttime}">{pretty_fly_time({$fleet.resttime})}</td>
 		<td colspan="2">{$fleet.text}</td>
 	</tr>
 	{/foreach}
 	<tr>
 		<td>{if $Moon}<a href="game.php?page=overview&amp;cp={$Moon.id}&amp;re=0" title="{$Moon.name}"><img src="{$dpath}planeten/mond.jpg" height="50" width="50" alt="{$Moon.name} ({$LNG.fcm_moon})"></a><br>{$Moon.name} ({$LNG.fcm_moon}){else}&nbsp;{/if}</td>
-		<td><img src="{$dpath}planeten/{$planetimage}.jpg" height="200" width="200" alt="{$planetname}"><br>{$build}</td>
+		<td>
+			<img src="{$dpath}planeten/{$planetimage}.jpg" height="200" width="200" alt="{$planetname}">
+			<br>{if $buildInfo.buildings}{$LNG.tech[$buildInfo.buildings['id']]} ({$buildInfo.buildings['level']})<br><div class="timer" data-time="{$buildInfo.buildings['timeleft']}">{$buildInfo.buildings['starttime']}</div>{else}{$LNG.ov_free}{/if}{*
+			<br>{if $buildInfo.tech}{$LNG.tech[$buildInfo.tech['id']]} ({$buildInfo.tech['level']})<br><div class="timer" data-time="{$buildInfo.tech['timeleft']}">{$buildInfo.tech['starttime']}</div>{else}{$LNG.ov_free}{/if}
+			<br>{if $buildInfo.fleet}{$LNG.tech[$buildInfo.fleet['id']]} ({$buildInfo.fleet['level']})<br><div class="timer" data-time="{$buildInfo.fleet['timeleft']}">{$buildInfo.fleet['starttime']}</div>{else}{$LNG.ov_free}{/if}*}
+		</td>
 		<td>
 		{if $AllPlanets}
 		<table>
@@ -80,10 +82,12 @@ buildEndTime	= {$buildtime};
 		<td>{$LNG.ov_position}</td>
 		<td colspan="2"><a href="game.php?page=galaxy&amp;galaxy={$galaxy}&amp;system={$system}">[{$galaxy}:{$system}:{$planet}]</a></td>
 	</tr>
+	{if isModulAvalible(25)}
 	<tr>
 		<td>{$LNG.ov_points}</td>
 		<td colspan="2">{$rankInfo}</td>
 	</tr>
+	{/if}
 	{if $ref_active}
 	<tr>
 		<th colspan="3">{$LNG.ov_reflink}</th>

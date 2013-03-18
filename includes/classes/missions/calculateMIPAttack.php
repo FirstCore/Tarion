@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,47 +18,53 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: calculateMIPAttack.php 2406 2012-10-31 10:27:25Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: calculateMIPAttack.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
 function calculateMIPAttack($TargetDefTech, $OwnerAttTech, $missiles, $targetDefensive, $firstTarget, $defenseMissles)
 {
-	global $pricelist, $reslist, $CombatCaps;
-	/* Interplanetarraketen haben eine Grundangriffskraft von 12.000 und richten damit bei 
-	ausgeglichenem Technologielevel zwischen Angreifer und Verteidiger immer einen 
-	Schaden von Metall+Kristall = 120.000 an. Wieviel davon Metall bzw. Kristall ist 
-	fließt nicht in die Berechnung mit ein. Ebenso wenig, wie das Deuterium. */
-	
-	// unset Missiles
-	unset($targetDefensive[503]);
+	global $pricelist, $CombatCaps;
 	
 	$destroyShips		= array();
+	$countMissles 		= $missiles - $defenseMissles;
 	
-	// kill destroyed missiles
-	$totalAttack		= ($missiles - $defenseMissles) * $CombatCaps[503]['attack'] * (1 + $OwnerAttTech / 10);
+	if($countMissles == 0)
+	{
+		return $destroyShips;
+	}
+
+	$totalAttack 		= $countMissles * $CombatCaps[503]['attack'] * (1 +  0.1 * $OwnerAttTech);
 	
-	$firstTargetData	= array($firstTarget => $targetDefensive[$firstTarget]);
-	unset($targetDefensive[$firstTarget]);
-	
-	$targetDefensive	= ($firstTargetData + array_diff_key($targetDefensive, $firstTargetData));
+	// Select primary target, if exists
+	if(isset($targetDefensive[$firstTarget]))
+	{
+		$firstTargetData	= array($firstTarget => $targetDefensive[$firstTarget]);
+		unset($targetDefensive[$firstTarget]);
+		$targetDefensive	= $firstTargetData + $targetDefensive;
+	}
 	
 	foreach($targetDefensive as $element => $count)
 	{
-		$elementDefensive		= ($pricelist[$element]['cost'][901] + $pricelist[$element]['cost'][902]) * (1 + $TargetDefTech / 10);
-		$destroyCount			= floor($totalAttack / $elementDefensive);
-		$destroyCount			= min($destroyCount, $count);
-		
-		$totalAttack			-= $destroyCount * $elementDefensive;
+		if($element == 0)
+		{
+			throw new Exception("Unknown error. Please report this error on tracker.2moons.cc. Debuginforations:<br><br>".serialize(array($TargetDefTech, $OwnerAttTech, $missiles, $targetDefensive, $firstTarget, $defenseMissles)));
+		}
+		$elementStructurePoints = ($pricelist[$element]['cost'][901] + $pricelist[$element]['cost'][902]) * (1 + 0.1 * $TargetDefTech) / 10;
+		$destroyCount           = floor($totalAttack / $elementStructurePoints);
+		$destroyCount           = min($destroyCount, $count);
+		$totalAttack  	       -= $destroyCount * $elementStructurePoints;
 		
 		$destroyShips[$element]	= $destroyCount;
+		if($totalAttack <= 0)
+		{
+			return $destroyShips;
+		}
 	}
 		
 	return $destroyShips;
 }
-	
-?>

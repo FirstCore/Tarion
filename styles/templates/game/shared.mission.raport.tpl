@@ -1,4 +1,4 @@
-{block name="title" prepend}{$LNG.lm_topkb}{/block}
+{block name="title" prepend}{$pageTitle}{/block}
 {block name="content"}
 {if isset($Info)}
 <table style="width:100%">
@@ -21,7 +21,7 @@
 			<table>
 				<tr>
 					<td>
-						{$LNG.sys_attack_attacker_pos} {$PlayerInfo.name} {if isset($Info)}([XX:XX:XX]){else}([{$PlayerInfo.koords[0]}:{$PlayerInfo.koords[1]}:{$PlayerInfo.koords[2]}]){/if}<br>
+						{$LNG.sys_attack_attacker_pos} {$PlayerInfo.name} {if isset($Info)}([XX:XX:XX]){else}([{$PlayerInfo.koords[0]}:{$PlayerInfo.koords[1]}:{$PlayerInfo.koords[2]}]{if isset($PlayerInfo.koords[3])} ({$LNG.type_planet_short[$PlayerInfo.koords[3]]}){/if}){/if}<br>
 						{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield} {$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
 						<table width="100%">
 						{if !empty($Player.ships)}
@@ -79,7 +79,7 @@
 			<table>
 				<tr>
 					<td>
-						{$LNG.sys_attack_defender_pos} {$PlayerInfo.name} {if isset($Info)}([XX:XX:XX]){else}([{$PlayerInfo.koords[0]}:{$PlayerInfo.koords[1]}:{$PlayerInfo.koords[2]}]){/if}<br>
+						{$LNG.sys_attack_defender_pos} {$PlayerInfo.name} {if isset($Info)}([XX:XX:XX]){else}([{$PlayerInfo.koords[0]}:{$PlayerInfo.koords[1]}:{$PlayerInfo.koords[2]}]{if isset($PlayerInfo.koords[3])} ({$LNG.type_planet_short[$PlayerInfo.koords[3]]}){/if}){/if}<br>
 						{$LNG.sys_ship_weapon} {$PlayerInfo.tech[0]}% - {$LNG.sys_ship_shield} {$PlayerInfo.tech[1]}% - {$LNG.sys_ship_armour} {$PlayerInfo.tech[2]}%
 						<table width="100%">
 						{if !empty($Player.ships)}
@@ -148,11 +148,6 @@
 {$LNG.debree_field_1} {foreach $Raport.debris as $elementID => $amount}{$amount|number} {$LNG.tech.$elementID}{if ($amount@index + 2) == count($Raport.debris)} {$LNG.sys_and} {elseif !$amount@last}, {/if}{/foreach}{$LNG.debree_field_2}<br><br>
 {if $Raport.mode == 1}
 	{* Destruction *}
-	{if isset($Info)}
-		{sprintf($LNG.sys_destruc_mess, "XX", "XX", "XX", "XX", "XX", "XX")}<br>
-	{else}
-		{sprintf($LNG.sys_destruc_mess, "{$Raport.start[0]}", "{$Raport.start[1]}", "{$Raport.start[2]}", "{$Raport.koords[0]}", "{$Raport.koords[1]}", "{$Raport.koords[2]}")}<br>
-	{/if}
 	{if $Raport.moon.moonDestroySuccess == -1}
 		{* Attack not win *}
 		{$LNG.sys_destruc_stop}<br>

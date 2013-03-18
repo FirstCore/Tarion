@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: constants.php 2462 2012-12-01 12:05:10Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: constants.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -70,9 +70,6 @@ define('INACTIVE_LONG'				, 2419200);
 // FEE FOR CANCEL QUEUE IN SHIPYARD
 define('FACTOR_CANCEL_SHIPYARD'		, 0.6);
 
-// ADDED PLANET PRO 2 TECH LEVELS
-define('PLANETS_PER_TECH'			, 2);	
-
 // MINIMUM FLEET TIME
 define('MIN_FLEET_TIME'				, 5);	
 
@@ -115,6 +112,16 @@ define('UTF8_SUPPORT'				, true);
 
 // Define, how its more hard to spy all inforation
 /*
+	if [Spy tech level of sender] > [Spy tech level of target]
+		min amount of spies = -1 * (abs([Spy tech level of sender] - [Spy tech level of target]) * SPY_DIFFENCE_FACTOR) ^ 2;
+	else
+		min amount of spies = -1 * (abs([Spy tech level of sender] - [Spy tech level of target]) * SPY_DIFFENCE_FACTOR) ^ 2;
+	
+*/
+define('SPY_DIFFENCE_FACTOR'		, 1);
+
+// Define, how its more hard to spy all inforation
+/*
 	min amount of spies = see MissionCaseSpy.php#78
 
 	To see Fleet		= {min amount of spies}
@@ -136,13 +143,6 @@ define('BASH_WAR'					, 0);
 
 // MINIMUM FLEET TIME MUST HIGHER THEN BASH_TIME
 define('FLEETLOG_AGE'				, 86400);	
-
-// EXPERIMENAL FUNCTION: DATABASE UPDATE
-define('ENABLE_DATABASE_BACKUP'		, false);
-// IT'S REQUIRED TO CHANGE TO DIR.
-// ADDIONALLY, ITS REQUIRED, PHP CAN WRITE INTO THIS DIR.
-// ALSO, ITS HIGHLY RECOMMEND TO FORBIDDEN THE DIR FOR HTTP USERS (.htaccess Protection)	
-define('STORAGE_BACKUP_TO_DIR'		, '/tmp/');
 
 // Root IDs
 define('ROOT_UNI'					, 1);	

@@ -21,8 +21,8 @@
  * @author Jan Kröpke <info@2moons.cc>
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: ADMIN.php 2447 2012-11-18 12:21:05Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: ADMIN.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -127,42 +127,42 @@ $LNG['ad_editor_authlevels']	= 'verwalte Rechte';
 $LNG['ad_add_not_exist']		= 'ID existiert nicht!';
 
 //	INVESTIGACIONES - RESEARCHS - FORSCHUNGEN
-$LNG['ad_add_succes']			= 'Hinzufügen der Forschungen war erfolgreich!';
-$LNG['ad_delete_succes']		= 'Löschen der Forschungen war erfolgreich!';
+$LNG['ad_add_tech_success']		= 'Hinzufügen der Forschungen war erfolgreich!';
+$LNG['ad_delete_tech_success']	= 'Löschen der Forschungen war erfolgreich!';
 $LNG['ad_research_title']		= 'Forschungen bearbeiten';
-$LNG['ad_research']		= 'Forschung';
+$LNG['ad_research']				= 'Forschung';
 
 //	OFICIALES - OFFICIERS - OFFIZIERE
 $LNG['ad_offi_title']			= 'Offiziere bearbeiten';
 $LNG['ad_offi']					= 'Offiziere';
-$LNG['ad_offi_succes_add']		= 'Hinzufügen der Offiziere war erfolgreich!';
-$LNG['ad_offi_succes_delete']	= 'Löschen der Offiziere war erfolgreich!';
+$LNG['ad_add_offi_success']		= 'Hinzufügen der Offiziere war erfolgreich!';
+$LNG['ad_delete_offi_success']	= 'Löschen der Offiziere war erfolgreich!';
 
 //	RECURSOS - RESOURCES - ROHSTOFFE
-$LNG['ad_add_sucess']		= 'Hinzufügen der Rohstoffe war erfolgreich!';
-$LNG['ad_delete_sucess']	= 'Löschen der Rohstoffe war erfolgreich!';
-$LNG['ad_main_title']		= 'Verwalten der Rohstoffe & Technologie';
+$LNG['ad_add_res_sucess']			= 'Hinzufügen der Rohstoffe war erfolgreich!';
+$LNG['ad_delete_res_sucess']		= 'Löschen der Rohstoffe war erfolgreich!';
+$LNG['ad_main_title']			= 'Verwalten der Rohstoffe & Technologie';
 
 //	NAVES - SHIPS - SCHIFFE
 $LNG['ad_ships_title']			= 'Schiffe bearbeiten';
-$LNG['ad_ships']			= 'Schiffe';
-$LNG['ad_add_sucess_ships']		= 'Hinzufügen der Schiffe war erfolgreich!';
-$LNG['ad_delete_sucess_ships']	= 'Löschen der Schiffe war erfolgreich!';
+$LNG['ad_ships']				= 'Schiffe';
+$LNG['ad_add_ships_sucess']		= 'Hinzufügen der Schiffe war erfolgreich!';
+$LNG['ad_delete_ships_sucess']	= 'Löschen der Schiffe war erfolgreich!';
 
 //	DEFENSAS - DEFENSES - VERTEIDIGUNG
 $LNG['ad_defenses_title']			= 'Verteidigungen bearbeiten';
-$LNG['ad_defenses']			= 'Verteidigung';
-$LNG['ad_add_defenses_succes']		= 'Hinzufügen der Verteidigungen war erfolgreich!';
-$LNG['ad_delete_defenses_succes']	= 'Löschen der Verteidigungen war erfolgreich!';
+$LNG['ad_defenses']					= 'Verteidigung';
+$LNG['ad_add_defenses_success']		= 'Hinzufügen der Verteidigungen war erfolgreich!';
+$LNG['ad_delete_defenses_success']	= 'Löschen der Verteidigungen war erfolgreich!';
 
 //	EDIFICIOS - BUILDINGS - GEBÄUDE
-$LNG['ad_buildings_title']	= 'Gebäude bearbeiten';
-$LNG['ad_buildings']	= 'Gebäude';
-$LNG['ad_planet_id']		= 'ID Planet oder Mond';
-$LNG['ad_levels']			= 'Anzahl der Stufe';
-$LNG['ad_count']			= 'Anzahl';
-$LNG['ad_add_succes']		= 'Hinzufügen der Gebäude war erfolgreich!';
-$LNG['ad_delete_succes']	= 'Löschen der Gebäude war erfolgreich!';
+$LNG['ad_buildings_title']		= 'Gebäude bearbeiten';
+$LNG['ad_buildings']			= 'Gebäude';
+$LNG['ad_planet_id']			= 'ID Planet oder Mond';
+$LNG['ad_levels']				= 'Anzahl der Stufe';
+$LNG['ad_count']				= 'Anzahl';
+$LNG['ad_add_build_success']			= 'Hinzufügen der Gebäude war erfolgreich!';
+$LNG['ad_delete_build_success']		= 'Löschen der Gebäude war erfolgreich!';
 
 // DATOS PERSONALES - PERSONAL DATA
 $LNG['ad_personal_title']		= 'Persönliche Daten bearbeiten';
@@ -509,6 +509,15 @@ $LNG['se_ref_minpoints']				= 'Min. Punkte für Bonus';
 $LNG['se_ref_minpoints_info']			= 'Der geworbende User muss diese Mindestpunktzahl erreichen, damit der werbende User seinen Bonus bekommt.';
 $LNG['se_ref_max_referals']				= 'Maximale Referal';
 $LNG['se_ref_max_referals_info']		= 'Maximale Anzahl, der der User an Spielern werben kann';
+$LNG['se_server_colonisation_config'] 	= 'Kolonisationseinstellungen';
+$LNG['se_planets_min'] 					= 'Max. kolonisierbare Planeten ohne Forschungen';
+$LNG['se_planets_min_info'] 			= 'Von Beginn an hat der Spieler die Möglichkeit die Angegebene Anzahl an Planeten zu besiedeln';
+$LNG['se_planets_tech'] 				= 'Max. zusätzliche Planetenzahl durch Foschung. (0 = deaktiviert Limit)';
+$LNG['se_planets_tech_info'] 			= 'Durch Forschung von Astrophysik hat der Spieler die Möglichkeit maximal die angegebene Anzahl an Planeten zusätzlich zu besiedeln.';
+$LNG['se_planets_officier'] 			= 'Max. zusätzliche Planetenzahl durch Offiziere';
+$LNG['se_planets_officier_info'] 		= 'Maximaler Bonus an Planeten durch Offiziere. (0 = deaktiviert Limit)';
+$LNG['se_planets_per_tech'] 			= 'Faktor: Planeten pro Stufe Astrophysik';
+$LNG['se_planets_per_tech_info'] 		= 'Pro geforschter Stufe kann der Spieler die angegebene Anzahl an Planeten zusätzlich besiedeln.';
 $LNG['se_silo_factor']					= 'Raketensilogröße';
 $LNG['se_silo_factor_info']				= 'Faktor für die größe des Silos';
 $LNG['se_timzone']						= 'Zeitzone des Unis';
@@ -517,6 +526,7 @@ $LNG['se_dst_sel'][0]					= 'Nein';
 $LNG['se_dst_sel'][1]					= 'Ja';
 $LNG['se_dst_sel'][2]					= 'Automatisch';
 $LNG['se_max_dm_missions']				= 'Max. Anzahl an parralell laufenden DM-Such Missionen';
+$LNG['se_alliance_create_min_points']   = 'Mindestpunktzahl, um eine Allianz gründen zu können';
 $LNG['se_disclamerAddress']				= 'Adresse';
 $LNG['se_disclamerPhone']				= 'Telefonnummer';
 $LNG['se_disclamerMail']				= 'E-Mail-Adresse';
@@ -625,7 +635,7 @@ $LNG['mu_mod_update']              	= 'Mod Versions Control';
 $LNG['mu_fb_options'] 				= 'Facebook Connect';
 $LNG['mu_ts_options'] 				= 'Teamspeak Optionen';
 $LNG['mu_game_info'] 				= 'Informationen';
-$LNG['mu_vaild_users']				= 'Aktivire User'; 
+$LNG['mu_vaild_users']				= 'Aktive User'; 
 $LNG['mu_news']						= 'News'; 
 $LNG['mu_multiip_page']				= 'MultiIP'; 
 $LNG['mu_clear_cache']				= 'Lösche Cache'; 
@@ -634,6 +644,7 @@ $LNG['mu_cronjob']					= 'Cronjobs';
 $LNG['mu_logs']						= 'Admin-Log';
 $LNG['mu_giveaway']					= 'Giveaways';
 $LNG['mu_disclamer']				= 'Impressum-Einstellungen';
+$LNG['mu_dump']						= 'Datenbank-Backup';
 
 
 $LNG['vt_error']					= 'HashFile ist nicht verfügbar! - Update durchführen!';
@@ -916,6 +927,13 @@ $LNG['new_creator_title_l']	= 'Erstelle Monde';
 $LNG['new_creator_coor']	= 'Koordinaten';
 $LNG['new_creator_go_back']	= '[ Zurück zum Menü ]';
 $LNG['new_creator_refresh']	= '[ Neu Laden ]';
+$LNG['uni_reg']				= 'Universum';
+$LNG['user_reg']			= 'Spielername';
+$LNG['pass_reg']			= 'Passwort';
+$LNG['pass2_reg']			= 'Passwort wiederholen';
+$LNG['email_reg']			= 'E-Mail Adresse';
+$LNG['email2_reg']			= 'E-Mail Adresse wiederholen';
+$LNG['lang_reg']			= 'Sprache';
 
 //	CREADOR DE USUARIOS - USERS MAKER
 $LNG['new_title']			= 'Erstelle neuen Spieler';
@@ -1223,6 +1241,8 @@ $LNG['cronName']['daily']			= 'Tägliche Aufgaben';
 $LNG['cronName']['cleaner']			= 'Alte Daten löschen';
 $LNG['cronName']['inactive']		= 'Inaktive löschen';
 $LNG['cronName']['teamspeak']		= 'Teamspeakdaten aktualisieren';
+$LNG['cronName']['tracking']		= 'Statistik an globalen Server senden.';
+$LNG['cronName']['databasedump']	= 'Datenbank-Backup';
 
 
 $LNG['cronjob_id']					= 'ID';
@@ -1270,7 +1290,6 @@ $LNG['ga_homecoordinates']				= 'Nur Heimatkoordinaten';
 $LNG['ga_no_inactives']					= 'Inaktive Spieler ausschließen';
 
 // Old SupportTicket Keys
-
 $LNG['supp_header'] 						= 'Support-System';
 $LNG['supp_header_g'] 						= 'Geschlossende Tickets';
 $LNG['ticket_id'] 							= '#Ticket-ID';
@@ -1300,4 +1319,11 @@ $LNG['supp_admin_answer'] 					= 'Admin-Antwort';
 $LNG['supp_player_write'] 					= '%s schreib am %s';
 $LNG['supp_player_answer'] 					= 'Spieler-Antwort';
 
-?>
+// SQL-Dumper
+
+$LNG['du_header']					= 'Datenbank-Backup erstellen';
+$LNG['du_submit']					= 'Absenden';
+$LNG['du_select_all_tables']		= 'Alle Tabellen';
+$LNG['du_choose_tables']			= 'Tabellen auswählen';
+$LNG['du_success']					= 'Backup erfolgreich erstellt! Datei: %s';
+$LNG['du_not_tables_selected']		= 'Du hast keine Tabellen zum sichern ausgewählt!';

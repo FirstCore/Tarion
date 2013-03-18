@@ -32,14 +32,25 @@ function NumberGetHumanReadable(value, dec) {
 
 function shortly_number(number)
 {
-	var unit = ["K", "M", "B", "T", "Q", "Q+", "S", "S+", "O", "N"];
-	key	= 0;
-	while(number >= 1000000)
-    {
+    var unit	= ["", "K", "M", "B", "T", "Q", "Q+", "S", "S+", "O", "N"];
+	var negate	= number < 0 ? -1 : 1;
+	var key		= 0;
+	number		= Math.abs(number);
+	
+	if(number >= 1000000) {
 		++key;
-        number = number / 1000000;
-    };
-	return NumberGetHumanReadable(number, ((number != 0 && number < 100) + 0))+'&nbsp;'+unit[key];
+		while(number >= 1000000)
+		{
+			++key;
+			number = number / 1000000;
+		}
+	} else if(number >= 1000) {
+		++key;
+		number = number / 1000;
+	}
+	
+	decial	= key != 0 && number != 0 && number < 100;
+	return NumberGetHumanReadable(negate * number, decial)+(key !== 0 ? '&nbsp;'+unit[key] : '');
 }
 
 function removeE(Number) {
@@ -225,10 +236,33 @@ $(function() {
 		});
 	});
 	
+	
+	window.setInterval(function() {
+		$('.countdown').each(function() {
+			var s		= $(this).data('time') - (serverTime.getTime() - startTime) / 1000;
+			if(s <= 0) {
+				$(this).text('-');
+			} else {
+				$(this).text(GetRestTimeFormat(s));
+			}
+		});
+	}, 1000);
+	
 	$('#planetSelector').on('change', function() {
 		document.location = '?'+queryString+'&cp='+$(this).val();
 	});
 
 	UhrzeitAnzeigen();
 	setInterval(UhrzeitAnzeigen, 1000);
+	
+	$("button#create_new_alliance_rank").click(function() {
+		$("div#new_alliance_rank").dialog(		{
+			draggable: false,
+			resizable: false,
+			modal: true,
+			width: 760
+		});
+
+		return false;
+	});
 });

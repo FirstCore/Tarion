@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: ShowConfigUniPage.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: ShowConfigUniPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -30,7 +30,7 @@ if (!allowedTo(str_replace(array(dirname(__FILE__), '\\', '/', '.php'), '', __FI
 
 function ShowConfigUniPage()
 {
-	global $LNG, $USER, $LANG;
+	global $LNG, $USER;
 	
 	$CONF	= Config::getAll(NULL, $_SESSION['adminuni']);
 	
@@ -73,7 +73,9 @@ function ShowConfigUniPage()
 			'max_system'			=> $CONF['max_system'],
 			'max_planets'			=> $CONF['max_planets'],
 			'min_player_planets'	=> $CONF['min_player_planets'],
-			'max_player_planets'	=> $CONF['max_player_planets'],
+			'planets_tech'			=> $CONF['planets_tech'],
+			'planets_officier'		=> $CONF['planets_officier'],
+			'planets_per_tech'		=> $CONF['planets_per_tech'],
 			'planet_factor'			=> $CONF['planet_factor'],
 			'max_elements_build'	=> $CONF['max_elements_build'],
 			'max_elements_tech'		=> $CONF['max_elements_tech'],
@@ -98,6 +100,7 @@ function ShowConfigUniPage()
 			'ref_max_referals'		=> $CONF['ref_max_referals'],
 			'silo_factor'			=> $CONF['silo_factor'],
 			'max_dm_missions'		=> $CONF['max_dm_missions'],
+			'alliance_create_min_points' => $CONF['alliance_create_min_points']
 		);
 		
 		$game_disable			= isset($_POST['closed']) && $_POST['closed'] == 'on' ? 1 : 0;
@@ -135,7 +138,9 @@ function ShowConfigUniPage()
 		$max_system				= HTTP::_GP('max_system', 0);
 		$max_planets			= HTTP::_GP('max_planets', 0);
 		$min_player_planets		= HTTP::_GP('min_player_planets', 0);
-		$max_player_planets		= HTTP::_GP('max_player_planets', 0);
+		$planets_tech			= HTTP::_GP('planets_tech', 0);
+		$planets_officier		= HTTP::_GP('planets_officier', 0);
+		$planets_per_tech		= HTTP::_GP('planets_per_tech', 0.0);
 		$planet_factor			= HTTP::_GP('planet_factor', 0.0);
 		$max_elements_build		= HTTP::_GP('max_elements_build', 0);
 		$max_elements_tech		= HTTP::_GP('max_elements_tech', 0);
@@ -159,6 +164,7 @@ function ShowConfigUniPage()
 		$silo_factor			= HTTP::_GP('silo_factor', 0);
 		$ref_max_referals		= HTTP::_GP('ref_max_referals', 0);
 		$max_dm_missions		= HTTP::_GP('max_dm_missions', 1);
+		$alliance_create_min_points = HTTP::_GP('alliance_create_min_points', 0);
 			
 		$config_after = array(
 			'noobprotectiontime'	=> $noobprotectiontime,
@@ -193,7 +199,9 @@ function ShowConfigUniPage()
 			'max_system'			=> $max_system,
 			'max_planets'			=> $max_planets,
 			'min_player_planets'	=> $min_player_planets,
-			'max_player_planets'	=> $max_player_planets,
+			'planets_tech'			=> $planets_tech,
+			'planets_officier'		=> $planets_officier,
+			'planets_per_tech'		=> $planets_per_tech,
 			'planet_factor'			=> $planet_factor,
 			'max_elements_build'	=> $max_elements_build,
 			'max_elements_tech'		=> $max_elements_tech,
@@ -218,6 +226,7 @@ function ShowConfigUniPage()
 			'ref_max_referals'		=> $ref_max_referals,
 			'silo_factor'			=> $silo_factor,
 			'max_dm_missions'		=> $max_dm_missions,
+			'alliance_create_min_points' => $alliance_create_min_points
 		);
 		
 		Config::update($config_after, $_SESSION['adminuni']);
@@ -379,6 +388,7 @@ function ShowConfigUniPage()
 		'se_silo_factor'				=> $LNG['se_silo_factor'],
 		'se_silo_factor_info'			=> $LNG['se_silo_factor_info'],
 		'se_max_dm_missions'			=> $LNG['se_max_dm_missions'],
+		'se_alliance_create_min_points' => $LNG['se_alliance_create_min_points'],
 		'game_name'						=> $CONF['game_name'],
 		'uni_name'						=> $CONF['uni_name'],
 		'game_speed'					=> ($CONF['game_speed'] / 2500),
@@ -420,7 +430,7 @@ function ShowConfigUniPage()
 		'trade_allowed_ships'        	=> $CONF['trade_allowed_ships'],
 		'trade_charge'		        	=> $CONF['trade_charge'],
 		'Selector'						=> array(
-			'langs' => $LANG->getAllowedLangs(false), 
+			'langs' => $LNG->getAllowedLangs(false), 
 			'mail' => $LNG['se_mail_sel'], 
 			'encry' => array('' => $LNG['se_smtp_ssl_1'], 'ssl' => $LNG['se_smtp_ssl_2'], 'tls' => $LNG['se_smtp_ssl_3'])
 		),
@@ -429,7 +439,9 @@ function ShowConfigUniPage()
 		'max_system'					=> $CONF['max_system'],
 		'max_planets'					=> $CONF['max_planets'],
 		'min_player_planets'			=> $CONF['min_player_planets'],
-		'max_player_planets'			=> $CONF['max_player_planets'],
+		'planets_tech'					=> $CONF['planets_tech'],
+		'planets_officier'				=> $CONF['planets_officier'],
+		'planets_per_tech'				=> $CONF['planets_per_tech'],
 		'planet_factor'					=> $CONF['planet_factor'],
 		'max_elements_build'			=> $CONF['max_elements_build'],
 		'max_elements_tech'				=> $CONF['max_elements_tech'],
@@ -455,9 +467,8 @@ function ShowConfigUniPage()
 		'ref_max_referals'				=> $CONF['ref_max_referals'],
 		'silo_factor'					=> $CONF['silo_factor'],
 		'max_dm_missions'				=> $CONF['max_dm_missions'],
+		'alliance_create_min_points' 	=> $CONF['alliance_create_min_points']
 	));
 	
 	$template->show('ConfigBodyUni.tpl');
 }
-
-?>

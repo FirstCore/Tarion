@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: ShowSupportPage.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: ShowSupportPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -75,22 +75,32 @@ class ShowSupportPage
 		$ticketID	= HTTP::_GP('id', 0);
 		$category	= HTTP::_GP('category', 0);
 		$message	= HTTP::_GP('message', '', true);
-		$change		= HTTP::_GP('change_status', '', true);
+		$change		= HTTP::_GP('change_status', 0);
 		
 		$ticketDetail	= $GLOBALS['DATABASE']->getFirstRow("SELECT ownerID, subject, status FROM ".TICKETS." WHERE ticketID = ".$ticketID.";");
-		$status = ($change ? ($ticketDetail['status'] <= 1 ? 2 : 1) : ($ticketDetail['status'] == 0 ? 1 : 1));
-		if(empty($message)) {
-			if ($status == 2 && $change) {
-				$message = $LNG['ti_admin_close'];
-			} elseif ($status == 1 && $change) {
-				$message = $LNG['ti_admin_open'];
-			} else {
-				HTTP::redirectTo('admin.php?page=support&mode=view&id='.$ticketID);
-			}
-		}
-		$subject		= "RE: ".$ticketDetail['subject'];
 		
-		$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $message, $status);
+		$status = ($change ? ($ticketDetail['status'] <= 1 ? 2 : 1) : 1);
+		
+		
+		if(!$change && empty($message))
+		{
+			HTTP::redirectTo('admin.php?page=support&mode=view&id='.$ticketID);
+		}
+		
+		if($change && $status == 1) {
+			$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_open'], $status);
+		}
+		
+		if(!empty($message))
+		{
+			$subject		= "RE: ".$ticketDetail['subject'];
+			$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $message, $status);
+		}
+		
+		if($change && $status == 2) {
+			$this->ticketObj->createAnswer($ticketID, $USER['id'], $USER['username'], $subject, $LNG['ti_admin_close'], $status);
+		}
+				
 		
 		SendSimpleMessage($ticketDetail['ownerID'], $USER['id'], TIMESTAMP, 4, $USER['username'], sprintf($LNG['sp_answer_message_title'], $ticketID), sprintf($LNG['sp_answer_message'], $ticketID)); 
 		HTTP::redirectTo('admin.php?page=support');
@@ -129,4 +139,3 @@ class ShowSupportPage
 		$this->tplObj->show('page.ticket.view.tpl');		
 	}
 }	
-?>

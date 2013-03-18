@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2011 Jan Kröpke
+ *  Copyright (C) 2011 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,21 +18,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
  * @copyright 2009 Lucky
- * @copyright 2011 Jan Kröpke <info@2moons.cc>
+ * @copyright 2011 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.0 (2011-12-10)
- * @info $Id: ReferralCronjob.class.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: ReferralCronjob.class.php 2527 2013-01-03 19:06:30Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
 
 class ReferralCronJob
 {
 	function run()
-	{
-		global $LNG, $LANG;
-		
+	{		
 		$CONF	= Config::getAll(NULL, ROOT_UNI);
 		
 		if($CONF['ref_active'] != 1)
@@ -46,15 +44,22 @@ class ReferralCronJob
 							  ON stats.`id_owner` = user.`id` AND stats.`stat_type` = '1' AND stats.`total_points` >= ".$CONF['ref_minpoints']."
 							  WHERE user.`ref_bonus` = 1;");
 							  
-		$LANG->setDefault($CONF['lang']);
+		$langObjects	= array();
+		
 		while($User	= $GLOBALS['DATABASE']->fetch_array($Users))
 		{
-			$LANG->setUser($User['lang']);	
-			$LANG->includeLang(array('L18N', 'INGAME', 'TECH'));
-			$GLOBALS['DATABASE']->multi_query("UPDATE ".USERS." SET `darkmatter` = `darkmatter` + ".$CONF['ref_bonus']." WHERE `id` = ".$User['ref_id'].";UPDATE ".USERS." SET `ref_bonus` = `ref_bonus` = '0' WHERE `id` = ".$User['id'].";");
+			if(!isset($langObjects[$User['lang']]))
+			{
+				$langObjects[$User['lang']]	= new Language($User['lang']);
+				$langObjects[$User['lang']]->includeData(array('L18N', 'INGAME', 'TECH', 'CUSTOM'));
+			}
+			
+			$LNG			= $langObjects[$User['lang']];
+			$GLOBALS['DATABASE']->multi_query("UPDATE ".USERS." SET `darkmatter` = `darkmatter` + ".$CONF['ref_bonus']." WHERE `id` = ".$User['ref_id'].";
+											   UPDATE ".USERS." SET `ref_bonus` = `ref_bonus` = '0' WHERE `id` = ".$User['id'].";");
+
 			$Message	= sprintf($LNG['sys_refferal_text'], $User['username'], pretty_number($CONF['ref_minpoints']), pretty_number($CONF['ref_bonus']), $LNG['tech'][921]);
 			SendSimpleMessage($User['ref_id'], '', TIMESTAMP, 4, $LNG['sys_refferal_from'], sprintf($LNG['sys_refferal_title'], $User['username']), $Message);
 		}
 	}
 }
-?>

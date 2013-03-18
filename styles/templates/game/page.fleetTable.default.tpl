@@ -14,8 +14,8 @@
 		<td>{$LNG.fl_beginning}</td>
 		<td>{$LNG.fl_departure}</td>
 		<td>{$LNG.fl_destiny}</td>
-		<td>{$LNG.fl_objective}</td>
 		<td>{$LNG.fl_arrival}</td>
+		<td>{$LNG.fl_objective}</td>
 		<td>{$LNG.fl_order}</td>
 	</tr>
 	{foreach name=FlyingFleets item=FlyingFleetRow from=$FlyingFleetList}
@@ -30,15 +30,14 @@
 	</td>
 	<td><a class="tooltip_sticky" data-tooltip-content="<table width='100%'><tr><th colspan='2' style='text-align:center;'>{$LNG.fl_info_detail}</th></tr>{foreach $FlyingFleetRow.FleetList as $shipID => $shipCount}<tr><td class='transparent'>{$LNG.tech.{$shipID}}:</td><td class='transparent'>{$shipCount}</td></tr>{/foreach}</table>">{$FlyingFleetRow.amount}</a></td>
 	<td><a href="game.php?page=galaxy&amp;galaxy={$FlyingFleetRow.startGalaxy}&amp;system={$FlyingFleetRow.startSystem}">[{$FlyingFleetRow.startGalaxy}:{$FlyingFleetRow.startSystem}:{$FlyingFleetRow.startPlanet}]</a></td>
-	<td>{$FlyingFleetRow.startTime}</td>
+	<td{if $FlyingFleetRow.state == 0} style="color:lime"{/if}>{$FlyingFleetRow.startTime}</td>
 	<td><a href="game.php?page=galaxy&amp;galaxy={$FlyingFleetRow.endGalaxy}&amp;system={$FlyingFleetRow.endSystem}">[{$FlyingFleetRow.endGalaxy}:{$FlyingFleetRow.endSystem}:{$FlyingFleetRow.endPlanet}]</a></td>
-	{if $FlyingFleetRow.mission == 4}
+	{if $FlyingFleetRow.mission == 4 && $FlyingFleetRow.state == 0}
 	<td>-</td>
-	<td style="color:lime">-</td>
 	{else}
-	<td>{$FlyingFleetRow.endTime}</td>
-	<td style="color:lime">{$FlyingFleetRow.backin}</td>
+	<td{if $FlyingFleetRow.state != 0} style="color:lime"{/if}>{$FlyingFleetRow.endTime}</td>
 	{/if}
+	<td id="fleettime_{$smarty.foreach.FlyingFleets.iteration}" class="fleets" data-fleet-end-time="{$FlyingFleetRow.returntime}" data-fleet-time="{$FlyingFleetRow.resttime}">{pretty_fly_time({$FlyingFleetRow.resttime})}</td>
 	<td>
 	{if !$isVacation && $FlyingFleetRow.state != 1}
 		<form action="game.php?page=fleetTable&amp;action=sendfleetback" method="post">
@@ -73,7 +72,7 @@
 	<tr><td colspan="9">{$LNG.fl_no_more_slots}</td></tr>
 	{/if}
 </table>
-{if isset($acsName)}
+{if !empty($acsData)}
 {include file="shared.fleetTable.acsTable.tpl"}
 {/if}
 <form action="?page=fleetStep1" method="post">
@@ -92,7 +91,7 @@
 		<td>-</td>
 		<td>-</td>
 	</tr>
-	{foreach name=Fleets item=FleetRow from=$FleetsOnPlanet}
+	{foreach $FleetsOnPlanet as $FleetRow}
 	<tr style="height:20px;">
 		<td>{if $FleetRow.speed != 0} <a title="{$LNG.fl_speed_title} {$FleetRow.speed}">{$LNG.tech.{$FleetRow.id}}</a>{else}{$LNG.tech.{$FleetRow.id}}{/if}</td>
 		<td id="ship{$FleetRow.id}_value">{$FleetRow.count|number}</td>
@@ -106,7 +105,7 @@
 	</tr>
 	{/foreach}
 	<tr style="height:20px;">
-	{if $smarty.foreach.Fleets.total == 0}
+	{if count($FleetsOnPlanet) == 0}
 	<td colspan="4">{$LNG.fl_no_ships}</td>
 	{else}
 	<td colspan="2"><a href="javascript:noShips();">{$LNG.fl_remove_all_ships}</a></td>
@@ -127,13 +126,4 @@
 	<tr><td>+{$bonusCombustion} %</td><td>+{$bonusImpulse} %</td><td>+{$bonusHyperspace} %</td></tr>
 </table>
 {/block}
-{block name="script" append}
-{if isset($smarty.get.code) && isset($LNG.fl_send_error.{$smarty.get.code})}
-<script type="text/javascript">
-    $(function() {
-     var error = "{$LNG.fl_send_error.{$smarty.get.code}}";
-    if(error != "") alert(error);
-    });
-</script>
-{/if}
-{/block}
+{block name="script" append}<script src="scripts/game/fleetTable.js"></script>{/block}

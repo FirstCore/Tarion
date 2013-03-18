@@ -1,156 +1,170 @@
 <?php
 
 /**
- *  Tarion.net
- *  All rights reversed (C) 2012
+ *  2Moons
+ *  Copyright (C) 2012 Jan Kröpke
  *
- *  Translated into Polish by Alojz and Gary (Tarion.net).
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @package 2Moons
+ * @author Jan Kröpke <info@2moons.cc>
+ * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: PUBLIC.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @link http://2moons.cc/
  */
 
 // Site Title
-$LNG['siteTitleIndex']				= 'Home';
-$LNG['siteTitleRegister']			= 'Rejstracja';
+$LNG['siteTitleIndex']				= 'Index';
+$LNG['siteTitleRegister']			= 'Rejestracja';
 $LNG['siteTitleScreens']			= 'Screenshots';
-$LNG['siteTitleBanList']			= 'Zbanowani';
-$LNG['siteTitleBattleHall']			= 'Ranking PvP';
+$LNG['siteTitleBanList']			= 'Prengierz';
+$LNG['siteTitleBattleHall']			= 'Hala sław';
 $LNG['siteTitleRules']				= 'Regulamin';
 $LNG['siteTitleNews']				= 'News';
-$LNG['siteTitleDisclamer']			= 'Kontakt';
-$LNG['siteTitleLostPassword']		= 'Przypomnienie Hasła?';
+$LNG['siteTitleDisclamer']			= 'Impressum';
+$LNG['siteTitleLostPassword']		= 'Zapomniałem hasło?';
 
 // Menu
 $LNG['forum']						= 'Forum';
-$LNG['menu_index']					= 'Home';
+$LNG['menu_index']					= 'IndeX';
 $LNG['menu_news']					= 'News';
 $LNG['menu_rules']					= 'Regulamin';
-$LNG['menu_banlist']				= 'Zbanowani';
-$LNG['menu_battlehall']				= 'Ranking PvP';
-$LNG['menu_disclamer']				= 'Kontakt';
+$LNG['menu_banlist']				= 'Prengierz';
+$LNG['menu_battlehall']				= 'Hala sław';
+$LNG['menu_disclamer']				= 'Impressum';
 $LNG['menu_register']				= 'Rejestracja';
 
 // Universe select
-$LNG['chose_a_uni']					= 'Wybierz Universum';
-$LNG['universe']					= 'Universe';
-$LNG['uni_closed']					= ' (closed)';
+$LNG['chose_a_uni']					= 'Wybór Universum';
+$LNG['universe']					= 'Universum';
+$LNG['uni_closed']					= ' (Zamknięte)';
 
 // Button
-$LNG['buttonRegister']				= 'Zarejestruj!';
+$LNG['buttonRegister']				= 'Zarejestruj Się!';
 $LNG['buttonScreenshot']			= 'Screenshots';
-$LNG['buttonLostPassword']			= 'Przypomnienie Hasła?';
+$LNG['buttonLostPassword']			= 'Zapomniałem hasło?';
 
 // Start
 $LNG['gameInformations']			= array(
-"Dołącz do najlepszych już teraz i zostań najpotężniejszym z nich.<br/><br/>
-
-Tarion.net jest darmową grą strategiczno-ekonomiczno osadzoną w realiach wszechogarniającego kosmosu.<br/>
-To najlepszy sposób na nudę, setki a nawet tysiące graczy spotyka się w świecie aby rozgrywać wspaniałe boje kosmiczne. <br/>
-Grając u nas poznasz masę graczy, zawiążesz sojusze, stworzysz swoje niepowtarzalne i ogromne Imperium, którego potęga bedzie siać postrach wobec twoich wrogów.<br/><br/>
-
-Urokliwy klimat jaki proponuje Tarion w Galaktycznym świecie jest nie do odrzucenia. Stań się kosmicznym władcą. Niech inni gracze drżą na samą myśl o Tobie!<br/><br/>
-
-Nie czekaj załóż Konto już TERAZ! To tylko parę minut! Galaktyka potrzebuję Cię.",
+	'Gra online strategiczno-ekonomiczna czasu rzeczywistego w kosmosie.',
+	'Graj przeciwko innym graczom.',
+	'Nic nie musisz sciągać, grasz w przeglądarce !.',
+	'Darmowa rejestracja',
 );
 
 // Login
-$LNG['loginHeader']					= 'Logowanie';
-$LNG['loginUsername']				= 'Użytkownik';
+$LNG['loginHeader']					= 'Zaloguj';
+$LNG['loginUsername']				= 'Nazwa Użytkownika';
 $LNG['loginPassword']				= 'Hasło';
-$LNG['loginButton']					= 'Logowanie';
+$LNG['loginButton']					= 'Login';
 $LNG['loginInfo']					= 'Logując się akceptujesz %s.';
-$LNG['loginWelcome']				= 'Witaj w %s';
-$LNG['loginServerDesc']				= '%s prywatnym serwerze. Wszystko czego potrzebujesz by się dobrze bawić to przeglądarka (Polecamy FireFox lub Chrome).';
+$LNG['loginWelcome']				= 'Witaj na %s';
+$LNG['loginServerDesc']				= '%s to gra online gdzie stajesz przeciwko innym graczom <strong>jednocześnie</strong> prubując zostać najlepszym . Wszystko co potrzebujesz do gry to zwykła przeglądarka.';
 
 // Register
-$LNG['registerFacebookAccount']		= 'Konto na Facebook-u';
-$LNG['registerUsername']			= 'Użytkownik';
-$LNG['registerUsernameDesc']		= 'Nazwa użytkownika musi mieć min. 3 i maks. 25 znaków, może składać się z cyfr, liter, podkreśleń i spacji';
+$LNG['registerFacebookAccount']		= 'Konto na Facebook';
+$LNG['registerUsername']			= 'Nazwa użytkownika';
+$LNG['registerUsernameDesc']		= 'Nazwa użytkownika musi składać się min. z 3 i max. z 25 znaków.';
 $LNG['registerPassword']			= 'Hasło';
-$LNG['registerPasswordDesc']		= 'Hasło musi mieć co najmniej 8 znaków';
-$LNG['registerPasswordReplay']		= 'Powtórz Hasło';
-$LNG['registerPasswordReplayDesc']	= 'Podaj ponownie Hasło';
+$LNG['registerPasswordDesc']		= 'Hasło musi mieć min 8 znaków.';
+$LNG['registerPasswordReplay']		= 'Ponowanie hasło';
+$LNG['registerPasswordReplayDesc']	= 'Powtórz hasło dla bezpieczeństwa!';
 $LNG['registerEmail']				= 'E-Mail';
-$LNG['registerEmailDesc']			= 'Wpisz swój adres E-mail';
+$LNG['registerEmailDesc']			= 'Podaj twój prawdziwy! E-Mail !';
 $LNG['registerEmailReplay']			= 'Powtórz E-Mail';
-$LNG['registerEmailReplayDesc']		= 'Podaj ponownie E-mail';
+$LNG['registerEmailReplayDesc']		= 'Powtórz email dla bezpieczeństwa!';
 $LNG['registerLanguage']			= 'Język';
-$LNG['registerReferral']			= 'Zaproszony przez :';
-$LNG['registerCaptcha']				= 'Podaj Kod';
-$LNG['registerCaptchaDesc']			= 'Wpisz znaki poniżej w pustym polu.';
-$LNG['registerCaptchaReload']		= 'Odśwież.';
-$LNG['registerRules']				= 'Regilamin';
-$LNG['registerRulesDesc']			= 'Zgadzam się z %s';
+$LNG['registerReferral']			= 'Zwerbowany przez:';
+$LNG['registerCaptcha']				= 'Kod';
+$LNG['registerCaptchaDesc']			= 'Podaj kod widoczny na obrazku';
+$LNG['registerCaptchaReload']		= 'Załaduj ponownie Captcha.';
+$LNG['registerRules']				= 'Regulamin';
+$LNG['registerRulesDesc']			= 'Potwierdzam że zrozumiałem %s.';
 
-$LNG['registerBack']				= 'Powrót';
-$LNG['registerNext']				= 'Następne';
+$LNG['registerBack']				= 'Wróć';
+$LNG['registerNext']				= 'Dalej';
 
-$LNG['registerErrorUniClosed']		= 'Rejestracja jest zamknięta!';
-$LNG['registerErrorUsernameEmpty']	= 'Musisz podać nazwę użytkownika!';
-$LNG['registerErrorUsernameChar']	= 'W nazwie użytkownika są dozwolone tylko liczby, litery i puste znaki, ewentualnie, _, - !';
-$LNG['registerErrorUsernameExist']	= 'Ta nazwa użytkownika jest zajęta!';
-$LNG['registerErrorPasswordLength']	= 'Hasło musi mieć co najmniej 8 znaków';
-$LNG['registerErrorPasswordSame']	= 'Podałeś dwa różne Hasła';
-$LNG['registerErrorMailEmpty']		= 'Musisz podać adres E-mailowy';
-$LNG['registerErrorMailInvalid']	= 'Błędny adres E-mail';
-$LNG['registerErrorMailSame']		= 'Podałeś dwa różne adresy E-mail';
-$LNG['registerErrorMailExist']		= 'Ten adres E-mail jest zajęty!';
-$LNG['registerErrorRules']			= 'Musisz zaakceptować Regulamin';
-$LNG['registerErrorCaptcha']		= 'Błędny Kod ';
+$LNG['registerErrorUniClosed']		= 'Rejestracja na tym universum zamknięta!';
+$LNG['registerErrorUsernameEmpty']	= 'Nie podałeś nazwy użytkownika!';
+$LNG['registerErrorUsernameChar']	= 'W nazwie użytkownika dozwolone są tylko litery, liczby, puste znaki i podkreślenia!';
+$LNG['registerErrorUsernameExist']	= 'Ta nazwa użytkownika jest już zajęta!';
+$LNG['registerErrorPasswordLength']	= 'Hasło musi mieć najmniej 6 znaków!';
+$LNG['registerErrorPasswordSame']	= 'Podałeś dwa różne znaki!';
+$LNG['registerErrorMailEmpty']		= 'Musisz podać adres prawidłowy adres email!';
+$LNG['registerErrorMailInvalid']	= 'Nie prawidłowy adres email!';
+$LNG['registerErrorMailSame']		= 'Podałeś 2 różne adresy email!';
+$LNG['registerErrorMailExist']		= 'Taki email jest już używany!';
+$LNG['registerErrorRules']			= 'Musisz zaakceptować regulamin!';
+$LNG['registerErrorCaptcha']		= 'Podałeś zły kod!';
 
-$LNG['registerMailVertifyTitle']	= 'Wiadomość aktywacji konta wysłana: %s';
-$LNG['registerMailVertifyError']	= 'Nie udało się wysłać wiadomości: %s';
+$LNG['registerMailVertifyTitle']	= 'Musisz potwierdzić rejestracje: %s';
+$LNG['registerMailVertifyError']	= 'Bład przy wysyłaniu emaila: %s';
 
-$LNG['registerMailCompleteTitle']	= 'Witaj w %s!';
+$LNG['registerMailCompleteTitle']	= 'Witaj na %s!';
 
-$LNG['registerSendComplete']		= 'Dziękujemy za zarejstrowanie się. Na adres E-mail została wysłana wiadomość(sprawdź SPAM) z dalszymi instrukcjami.';
+$LNG['registerSendComplete']		= 'Dziękujemy za rejestrację. Wkrótce otrzymasz email z dalszymi krokami.';
 
 $LNG['registerWelcomePMSenderName']	= 'Administrator';
 $LNG['registerWelcomePMSubject']	= 'Witaj';
-$LNG['registerWelcomePMText']		= 'Witaj na %s!<br>Pierwsze to zbuduj to <b>"Elektorwnie słoneczną"</b>, energia jest wymagana by móc wydobywać zasoby. By zacząć budowe wejdź w menu budynki . I zbuduj 4-ty budynek od góry. Teraz możesz zacząc budować <b>"Kopalnie"</b>. Wróć do menu budynków i zacznij budować kopalnie metalu, potem kryształu. By budować okręty musisz najpierw zbudować <b>"Stocznie"</b>. Co jest wymagane, informacje znajdziesz w menu <b>"Technologie"</b>. Więcej informacji znajdziesz w <b>"Suporcie"</b>. Administracja Życzy Miłego grania oraz Wielkich podbojów!';
+$LNG['registerWelcomePMText']		= 'Witaj na %s! Jako pierwszy budnek zbuduj elektrownie słoneczną, energia jest konieczna do pracy kopalń i wydobywania zasobów!. By zbudować kliknij na zakładkę "Budynki" w Menu. Potem zbuduj 4. budynek od góry. Po zbudowaniu masz już energię, zatem czas zbudować kopalnie metalu i kryształu. Jeśli chcesz coś zbudować a nie możesz, skorzystaj z zakładki Technologia, tam dowiesz się co jest wymagane do budowy czy też badania!';
 
-// Vertify
-$LNG['vertifyNoUserFound']			= 'Nieporpawne dane!';
+//Vertify
+
+$LNG['vertifyNoUserFound']			= 'Niepoprawne zapytanie!';
 $LNG['vertifyAdminMessage']			= 'Użytkownik "%s" został aktywowany!';
 
-// Lostpassword
-$LNG['passwordInfo']				= 'Jeśli nie pamiętasz Hasła, należy podać nazwę użytkownika i adres E-mail, które zostały podane podczas zakładania Konta.';
-$LNG['passwordUsername']			= 'Użytkownik';
+
+//lostpassword
+$LNG['passwordInfo']				= 'Jeśli zapomniałeś hasła musisz podać nazwę użytkownika i adres email użyty podczas rejestracji lub aktywny w profilu.';
+$LNG['passwordUsername']			= 'Nazwa użytkownika';
 $LNG['passwordMail']				= 'E-Mail';
 $LNG['passwordCaptcha']				= 'Kod';
-$LNG['passwordSubmit']				= 'Temat';
-$LNG['passwordErrorUsernameEmpty']	= 'Niepoprawna nazwa Użytkownika!';
-$LNG['passwordErrorMailEmpty']		= 'Niepoprawny adres E-mail!';
-$LNG['passwordErrorUnknown']		= 'Nie można znaleźć informacji o Koncie.';
-$LNG['passwordErrorOnePerDay']		= 'Hasło dla tego Konta Użytkownika w ciągu ostatnich 24 godzin zostało wysłane. Można zażądać hasła do konta min. co 24 h. ';
+$LNG['passwordSubmit']				= 'Wyślij';
+$LNG['passwordErrorUsernameEmpty']	= 'Nie podałeś nazwy użytkownika!';
+$LNG['passwordErrorMailEmpty']		= 'Nie podałeś adresu email!';
+$LNG['passwordErrorUnknown']		= 'Nie można znaleźć użytkownika o takim adresie email lub nazwie użytkownika.';
+$LNG['passwordErrorOnePerDay']		= 'W ciągu ostatnich 24h zostało zmienione hasło użytkownika. Pamiętaj!, że hasło możesz zmienić raz na dobę';
 
-$LNG['passwordValidMailTitle']		= 'Zapomniałem hasła do gry: %s';
-$LNG['passwordValidMailSend']		= 'Otrzymasz wiadomość E-mail z dalszymi informacjami.';
+$LNG['passwordValidMailTitle']		= 'Przypomnienie hasła dla strony: %s';
+$LNG['passwordValidMailSend']		= 'Otrzymasz maila z informacjami co dalej.';
 
-$LNG['passwordValidInValid']		= 'Niepoprawne dane!';
-$LNG['passwordChangedMailSend']		= 'Otrzymasz wiadomość E-mail z nowym hasłem.';
-$LNG['passwordChangedMailTitle']	= 'Nowe hasło Użytkownika: %s';
+$LNG['passwordValidInValid']		= 'Niepoprawne zapytanie!';
+$LNG['passwordChangedMailSend']		= 'Wkrótce otrzymasz emaila z nowym hasłem.';
+$LNG['passwordChangedMailTitle']	= 'Nowe hasło: %s';
 
-$LNG['passwordBack']				= 'Powrót';
-$LNG['passwordNext']				= 'Następne';
+$LNG['passwordBack']				= 'Wróć';
+$LNG['passwordNext']				= 'Dalej';
 
-// Case default
-$LNG['login_error_1']				= 'Błędna nazwa użytkownik i/lub hasło!';
-$LNG['login_error_2']				= 'Ktoś się zalogował na to Konto z innego komputera!';
-$LNG['login_error_3']				= 'Twoja sesja wygasła';
-$LNG['login_error_4']				= 'Wystąpiło błędne logowanie. Spróbuj ponownie!';
+//case default
 
-// Rules
+$LNG['login_error_1']				= 'Błąd nazwy użytkownika, lub hasło!';
+$LNG['login_error_2']				= 'Ktoś zalogował się na twoje konto z innego komputera!';
+$LNG['login_error_3']				= 'Sesja wygasła!';
+$LNG['login_error_4']				= 'Wystąpił błąd, sprubuj potem!';
+
+//Rules
 $LNG['rulesHeader']					= 'Regulamin';
 
-// NEWS
-$LNG['news_overview']				= 'Nowości';
-$LNG['news_from']					= 'Od %s Do %s';
-$LNG['news_does_not_exist']			= 'Brak nowych Informacji!';
+//NEWS
+$LNG['news_overview']				= 'News';
+$LNG['news_from']					= 'Od %s do %s';
+$LNG['news_does_not_exist']			= 'Brak postów!';
 
-// Impressum
-$LNG['disclamerLabelAddress']		= 'Adres Gry:';
-$LNG['disclamerLabelPhone']			= 'Numer kontaktowy:';
-$LNG['disclamerLabelMail']			= 'E-mail:';
-$LNG['disclamerLabelNotice']		= 'Dodatkowe Informacji';
-
-?>
+//Impressum
+$LNG['disclamerLabelAddress']		= 'Adres:';
+$LNG['disclamerLabelPhone']			= 'Telefon Nr.:';
+$LNG['disclamerLabelMail']			= 'E-Mail Adres:';
+$LNG['disclamerLabelNotice']		= 'Więcej informacji';

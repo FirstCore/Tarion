@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.ShowInformationPage.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.ShowInformationPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -55,7 +55,7 @@ class ShowInformationPage extends AbstractPage
 			$this->sendJSON(array('message' => $LNG['in_jump_gate_already_used'].' '.pretty_time($NextJumpTime - TIMESTAMP), 'error' => true));
 		}
 		
-		$TargetPlanet = HTTP::_GP('jmpto', $PLANET['id']);
+		$TargetPlanet = HTTP::_GP('jmpto', (int) $PLANET['id']);
 		$TargetGate   = $GLOBALS['DATABASE']->getFirstRow("SELECT id, last_jump_time FROM ".PLANETS." WHERE id = ".$TargetPlanet." AND id_owner = ".$USER['id']." AND sprungtor > 0;");
 
 		if (!isset($TargetGate) || $TargetPlanet == $PLANET['id']) {
@@ -186,6 +186,7 @@ class ShowInformationPage extends AbstractPage
 		$productionTable	= array();
 		$FleetInfo			= array();
 		$MissileList		= array();
+		$gateData			= array();
 
 		$CurrentLevel		= 0;
 		
@@ -297,17 +298,18 @@ class ShowInformationPage extends AbstractPage
 				}
 			}
 		}
-		elseif($elementID == 43 && $PLANET[$resource[43]] > 0)
+		
+		if($elementID == 43 && $PLANET[$resource[43]] > 0)
 		{
 			$this->tplObj->loadscript('gate.js');
 			$nextTime	= self::getNextJumpWaitTime($PLANET['last_jump_time']);
-			$this->tplObj->assign_vars(array(
+			$gateData	= array(
 				'nextTime'	=> _date($LNG['php_tdformat'], $nextTime, $USER['timezone']),
 				'restTime'	=> max(0, $nextTime - TIMESTAMP),
 				'startLink'	=> $PLANET['name'].' '.strip_tags(BuildPlanetAdressLink($PLANET)),
 				'gateList' 	=> $this->getTargetGates(),
 				'fleetList'	=> $this->getAvalibleFleets(),
-			));
+			);
 		}
 		elseif($elementID == 44 && $PLANET[$resource[44]] > 0)
 		{								
@@ -324,9 +326,9 @@ class ShowInformationPage extends AbstractPage
 			'MissileList'		=> $MissileList,
 			'Bonus'				=> BuildFunctions::getAvalibleBonus($elementID),
 			'FleetInfo'			=> $FleetInfo,
+			'gateData'			=> $gateData,
 		));
 		
 		$this->display('page.infomation.default.tpl');
 	}
 }
-?>

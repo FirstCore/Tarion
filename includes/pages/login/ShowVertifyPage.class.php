@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowVertifyPage.class.php 2421 2012-11-11 11:53:35Z slaver7 $
+ * @info $Id: ShowVertifyPage.class.php 2496 2013-01-01 13:26:23Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -56,7 +56,7 @@ class ShowVertifyPage extends AbstractPage
 		if(Config::get('mail_active', $userData['universe']) == 1) {
 			require(ROOT_PATH.'includes/classes/Mail.class.php');
 			$MailSubject	= t('registerMailCompleteTitle', Config::get('game_name', $userData['universe']));	
-			$MailRAW		= $GLOBALS['LANG']->getMail('email_reg_done');
+			$MailRAW		= $GLOBALS['LNG']->getTemplate('email_reg_done');
 			$MailContent	= str_replace(array(
 				'{USERNAME}',
 				'{GAMENAME}',

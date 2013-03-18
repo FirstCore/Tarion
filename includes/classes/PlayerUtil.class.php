@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: PlayerUtil.class.php 2418 2012-11-10 16:07:52Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: PlayerUtil.class.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -373,39 +373,46 @@ class PlayerUtil {
 		}
 	}
 	
-	static function maxPlanetCount($USER, $PLANET)
+	static function maxPlanetCount($USER)
 	{
 		global $resource;
 		$CONF	= Config::getAll('universe', $USER['universe']);
-		
-		if(empty($CONF['max_player_planets']))
+
+		if($CONF['min_player_planets'] == 0)
 		{
-			return 0;
+			$CONF['planets_tech'] = 999;
 		}
 
+		if($CONF['min_player_planets'] == 0)
+		{
+			$CONF['planets_officier'] = 999;
+		}
+		
 		// http://owiki.de/index.php/Astrophysik#.C3.9Cbersicht
-		return min($CONF['min_player_planets'] + ceil($USER[$resource[124]] / 2) * PLANETS_PER_TECH * $USER['factor']['Planets'], $CONF['max_player_planets']);
+		return (int) ceil($CONF['min_player_planets'] + min($CONF['planets_tech'], $USER[$resource[124]] * $CONF['planets_per_tech']) + min($CONF['planets_officier'],$USER['factor']['Planets']));
 	}
 
-	static function allowPlanetPosition($planetPosition)
+	static function allowPlanetPosition($position, $USER)
 	{
 		// http://owiki.de/index.php/Astrophysik#.C3.9Cbersicht
-		
-		switch($planetPosition) {
+
+		global $resource;
+		$CONF	= Config::getAll('universe', $USER['universe']);
+		switch($position) {
 			case 1:
-			case 15:
-				return 8;
+			case ($CONF['max_planets']):
+				return $USER[$resource[124]] >= 8;
 			break;
 			case 2:
-			case 14:
-				return 6;
+			case ($CONF['max_planets']-1):
+				return $USER[$resource[124]] >= 6;
 			break;
 			case 3:
-			case 13:
-				return 4;
+			case ($CONF['max_planets']-2):
+				return $USER[$resource[124]] >= 4;
 			break;
 			default:
-				return 1;
+				return $USER[$resource[124]] >= 1;
 			break;
 		}
 	}

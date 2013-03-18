@@ -22,7 +22,7 @@
 	{foreach $memberList as $userID => $memberListRow}
 	<tr>
 		<td>{$memberListRow@iteration}</td>
-		<td>{$memberListRow.username}</td>
+		<td><a href="#" onclick="return Dialog.Playercard({$userID}, '{$memberListRow.username}');">{$memberListRow.username}</a></td>
 		<td><a href="#" onclick="return Dialog.PM({$userID});"><img src="{$dpath}img/m.gif" border="0" title="{$LNG.write_message}"></a></td>
 		<td>{if $memberListRow.rankID == -1}{$founder}{else}{html_options name="rank[{$userID}]" options=$rankList selected=$memberListRow.rankID}{/if}</td>
 		<td><span title="{$memberListRow.points|number}">{shortly_number($memberListRow.points)}</span></td>

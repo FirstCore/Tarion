@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: MissionCaseSpy.php 2462 2012-12-01 12:05:10Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: MissionCaseSpy.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -36,13 +36,13 @@ class MissionCaseSpy extends MissionFunctions
 	
 	function TargetEvent()
 	{
-		global $pricelist, $reslist, $resource, $LANG;		
+		global $pricelist, $reslist, $resource;		
 		$senderUser		= $GLOBALS['DATABASE']->getFirstRow("SELECT * FROM ".USERS." WHERE id = ".$this->_fleet['fleet_owner'].";");
 		$senderPlanet	= $GLOBALS['DATABASE']->getFirstRow("SELECT galaxy, system, planet, name FROM ".PLANETS." WHERE id = ".$this->_fleet['fleet_start_id'].";");
 		$senderUser['factor']	= getFactors($senderUser, 'basic', $this->_fleet['fleet_start_time']);
 		$ownSpyLvl		= max($senderUser['spy_tech'], 1);
 		
-		$LNG			= $LANG->GetUserLang($senderUser['lang']);
+		$LNG			= $this->getLanguage($senderUser['lang']);
 		
 		$targetUser		= $GLOBALS['DATABASE']->getFirstRow("SELECT * FROM ".USERS." WHERE id = ".$this->_fleet['fleet_target_owner'].";");
 		$targetPlanet	= $GLOBALS['DATABASE']->getFirstRow("SELECT * FROM ".PLANETS." WHERE id = ".$this->_fleet['fleet_end_id'].";");
@@ -72,10 +72,10 @@ class MissionCaseSpy extends MissionFunctions
 		
 		$GLOBALS['DATABASE']->free_result($targetStayFleets);
 		
-		$fleetAmount	= $this->_fleet['fleet_amount'];
+		$fleetAmount	= $this->_fleet['fleet_amount'] * (1 + $senderUser['factor']['SpyPower']);
 		
 		$Diffence		= abs($ownSpyLvl - $targetSpyLvl);
-		$MinAmount		= ($ownSpyLvl > $targetSpyLvl ? -1 * pow($Diffence, 2) : pow($Diffence, 2)) - (100 * $senderUser['factor']['SpyPower']);
+		$MinAmount		= ($ownSpyLvl > $targetSpyLvl ? -1 : 1) * pow($Diffence * SPY_DIFFENCE_FACTOR, 2);
 		$SpyFleet		= $fleetAmount >= $MinAmount;
 		$SpyDef			= $fleetAmount >= $MinAmount + 1 * SPY_VIEW_FACTOR;
 		$SpyBuild		= $fleetAmount >= $MinAmount + 3 * SPY_VIEW_FACTOR;
@@ -155,7 +155,7 @@ class MissionCaseSpy extends MissionFunctions
 
 		SendSimpleMessage($this->_fleet['fleet_owner'], 0, $this->_fleet['fleet_start_time'], 0, $LNG['sys_mess_qg'], $LNG['sys_mess_spy_report'], $spyRaport);
 		
-		$LNG		    = $LANG->GetUserLang($targetUser['lang']);
+		$LNG			= $this->getLanguage($targetUser['lang']);
 		$targetMessage  = $LNG['sys_mess_spy_ennemyfleet'] ." ". $senderPlanet['name'];
 
 		if($this->_fleet['fleet_start_type'] == 3)
@@ -195,5 +195,3 @@ class MissionCaseSpy extends MissionFunctions
 		$this->RestoreFleet();
 	}
 }
-
-?>

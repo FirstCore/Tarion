@@ -1,22 +1,41 @@
 <?php
 
 /**
- *  Tarion.net
- *  All rights reversed (C) 2012
+ *  2Moons
+ *  Copyright (C) 2011 Jan Kröpke
  *
- *  Translated into Polish by Alojz and Gary (Tarion.net).
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @package 2Moons
+ * @author Jan Kröpke <info@2moons.cc>
+ * @copyright 2009 Lucky
+ * @copyright 2011 Jan Kröpke <info@2moons.cc>
+ * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
+ * @version 1.5 (2011-07-31)
+ * @info $Id: INSTALL.php 2588 2013-01-14 16:51:24Z slaver7 $
+ * @link http://2moons.cc/
  */
 
 $LNG['back']					= 'Wróć';
 $LNG['continue']				= 'Dalej';
-$LNG['continueUpgrade']			= 'Upgrade!';
+$LNG['continueUpgrade']			= 'Aktualizuj!';
 $LNG['login']					= 'Login';
 
 $LNG['menu_intro']				= 'Intro';
 $LNG['menu_install']			= 'Instalacja';
 $LNG['menu_license']			= 'Licencja';
-$LNG['menu_upgrade']			= 'Upgrade';
+$LNG['menu_upgrade']			= 'Uktualizacja';
 
 $LNG['title_install']			= 'Instalator';
 
@@ -24,8 +43,16 @@ $LNG['intro_lang']				= 'Język';
 $LNG['intro_install']			= 'Przejdź do instalacji';
 $LNG['intro_welcome']			= 'Serdecznie witamy w 2Moons!';
 $LNG['intro_text']				= '2Moons to najlepszy klon Ogame.<br>2Moons to najnowsza i najbardziej stabilna wersja Xnova, jaka kiedykolwiek powstała. Cechuje ją przyjazność, elastyczność i dynamiczność jak również jakość obsługi. Mamy nadzieję że jak zawsze sprawimy się lepiej niż oczekiwaliście. System przeprowadzi Cię przez proces instalacji, lub też aktualizacji aktualnej wersji do najnowszej. Jeśli masz jakiekolwiek problemy nie wachaj się zadać pytania na naszym forum poświęconemu rozwojowi i wsparciu.<br><br>2Moons podlega licencji GNU GPL v3. Licencje przeczytasz po kliknięciu odpowiedniego linku w menu.<br><br>Przed instalacją skrypt sprawdzi czy twój serwer spełnia minimalne wymagania.';
-$LNG['intro_upgrade_head']		= '2Moons already installed?';
-$LNG['intro_upgrade_text']		= '<p>You have already installed 2Moons and want easy updating?</p><p>Here you can update your old database with just a few clicks!</p>';
+$LNG['intro_upgrade_head']		= 'Zainstalować 2Moons?';
+$LNG['intro_upgrade_text']		= '<p>2Moons zainstalowane, chcesz teraz sprawdzić aktualizację?</p><p>Aktulizacje!</p>';
+
+$LNG['upgrade_success']			= 'Aktualizacja przebiegła pomyślnie, baza danych została zaktualizowana do %s.';
+$LNG['upgrade_nothingtodo']		= 'Baza danych aktualna z wersją %s.';
+$LNG['upgrade_back']			= 'Wróć';
+$LNG['upgrade_intro_welcome']	= 'Witaj w aktualizatorze bazy danych!';
+$LNG['upgrade_available']		= 'Dostępna jest aktualizacja bazy danych. Aktualna wersja bazy to %s i może zostać zaktualizowana do wersji %s.<br><br>Wybierz z menu wersję do której chcesz zaktualizować:';
+$LNG['upgrade_notavailable']	= 'Wersja %s bazy to aktualna wersja!.';
+$LNG['upgrade_required_rev']	= 'Aktualizator bazy danych działa od wersji r2579 (2Moons v1.7) lub wyższej!.';
 
 $LNG['licence_head']			= 'Licencja';
 $LNG['licence_desc']			= 'Prosze przeczytać licencję, przewiń by przeczytać całą!.';
@@ -98,6 +125,4 @@ $LNG['step6_info_head']			= 'Możesz już grać!';
 $LNG['step6_info_additional']	= 'Po kliknięciu zostaniesz przeniesiony na stronę zarządzania grą.<br/><br/><strong>Skasuj plik &raquo;includes/ENABLE_INSTALL_TOOL&laquo; nim gra zostanie udostępniona, w przeciwnym wypadku bezpieczeństwo serwera będzie zagrożone!</strong>';
 
 $LNG['sql_close_reason']		= 'Gra chwilowo zamknięta';
-$LNG['sql_welcome']				= 'Serdecznie witamy na planecie v';
-
-?>
+$LNG['sql_welcome']				= 'Serdecznie witamy na 2Moons v';

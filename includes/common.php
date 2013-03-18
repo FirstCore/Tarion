@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: common.php 2446 2012-11-18 12:19:04Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: common.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -52,6 +52,9 @@ if (function_exists('mb_internal_encoding')) {
 ignore_user_abort(true);
 error_reporting(E_ALL & ~E_STRICT);
 
+// If the guy forgot to set date.timezone on php.ini
+date_default_timezone_set(@date_default_timezone_get());
+
 ini_set('display_errors', 1);
 header('Content-Type: text/html; charset=UTF-8');
 define('TIMESTAMP',	time());
@@ -67,12 +70,12 @@ set_error_handler('errorHandler');
 
 require(ROOT_PATH . 'includes/classes/class.Cache.php');
 require(ROOT_PATH . 'includes/classes/class.Database.php');
-require(ROOT_PATH . 'includes/classes/class.Lang.php');
 require(ROOT_PATH . 'includes/classes/class.theme.php');
 require(ROOT_PATH . 'includes/classes/class.Session.php');
 require(ROOT_PATH . 'includes/classes/class.template.php');
 require(ROOT_PATH . 'includes/classes/Config.class.php');
 require(ROOT_PATH . 'includes/classes/ArrayUtil.class.php');
+require(ROOT_PATH . 'includes/classes/Language.class.php');
 require(ROOT_PATH . 'includes/classes/HTTP.class.php');
 require(ROOT_PATH . 'includes/classes/PlayerUtil.class.php');
 
@@ -81,8 +84,8 @@ HTTP::sendHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HI
 define('AJAX_REQUEST', HTTP::_GP('ajax', 0));
 
 $THEME		= new Theme();	
-$LANG		= new Language();
 $CACHE		= new Cache();
+
 if (MODE === 'INSTALL')
 {
 	return;
@@ -105,8 +108,6 @@ Config::setGlobals();
 
 date_default_timezone_set(Config::get('timezone'));
 
-$LANG->setDefault(Config::get('lang'));
-
 require(ROOT_PATH.'includes/vars.php');
 
 if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CHAT')
@@ -118,6 +119,7 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CHAT')
 	
 	$SESSION->UpdateSession();
 
+	require(ROOT_PATH.'includes/classes/class.BuildFunctions.php');
 	require(ROOT_PATH.'includes/classes/class.PlanetRessUpdate.php');
 	
 	if(!AJAX_REQUEST && MODE === 'INGAME' && isModulAvalible(MODULE_FLEET_EVENTS)) {
@@ -139,8 +141,8 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CHAT')
 		exit(header('Location: index.php'));
 	}
 	
-	$LANG->setUser($USER['lang']);	
-	$LANG->includeLang(array('L18N', 'INGAME', 'TECH', 'CUSTOM'));
+	$LNG	= new Language($USER['lang']);
+	$LNG->includeData(array('L18N', 'INGAME', 'TECH', 'CUSTOM'));
 	$THEME->setUserTheme($USER['dpath']);
 	
 	if(Config::get('game_disable') == 0 && $USER['authlevel'] == AUTH_USR) {
@@ -172,15 +174,16 @@ if (MODE === 'INGAME' || MODE === 'ADMIN' || MODE === 'CHAT')
 		
 		$USER['factor']		= getFactors($USER);
 		$USER['PLANETS']	= getPlanets($USER);
-	} else {
+	} elseif (MODE === 'ADMIN') {
 		error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		
 		$USER['rights']		= unserialize($USER['rights']);
-		$LANG->includeLang(array('ADMIN', 'CUSTOM'));
+		$LNG->includeData(array('ADMIN', 'CUSTOM'));
 	}
 }
 elseif(MODE === 'LOGIN')
 {
-	$LANG->GetLangFromBrowser();
-	$LANG->includeLang(array('L18N', 'INGAME', 'PUBLIC', 'CUSTOM'));
+	$LNG	= new Language();
+	$LNG->getUserAgentLanguage();
+	$LNG->includeData(array('L18N', 'INGAME', 'PUBLIC', 'CUSTOM'));
 }

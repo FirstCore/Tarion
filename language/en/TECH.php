@@ -20,10 +20,10 @@ $LNG['shortNames'] = array (
 214 => 'Battle Fortress',
 215 => 'Battle Cruiser',
 216 => 'Black Moon',
-217 => 'Evolved Transporter',
+217 => 'Battle Transporter',
 218 => 'Avatar',
-219 => 'Giga Recycler',
-220 => 'Inter. DM-Collector',
+219 => 'Battle Recycler',
+220 => 'Dark Matter Collector',
 
 401 => 'Missile Launcher',
 402 => 'Light Laser Turret',
@@ -120,9 +120,9 @@ $LNG['tech'] = array(
 214 => 'Battle Fortress',
 215 => 'Battle Cruiser',
 216 => 'Black Moon',
-217 => 'Evolved Transporter',
+217 => 'Battle Transporter',
 218 => 'Avatar',
-219 => 'Giga Recycler',
+219 => 'Battle Recycler',
 220 => 'Dark Matter Collector',
 
 400 => 'Planetary Defense',
@@ -138,6 +138,7 @@ $LNG['tech'] = array(
 410 => 'Gravitons Cannon',
 411 => 'Orbital Defence Platform',
 
+500 => 'Missiles',
 502 => 'Interceptor',
 503 => 'Interplanetary missiles',
 
@@ -377,5 +378,3 @@ $LNG['longDescription'] = array(
 706 => 'Shortens research time',
 707 => 'Shortens flying time. Does not affect Expeditions.',
 );
-
-?>

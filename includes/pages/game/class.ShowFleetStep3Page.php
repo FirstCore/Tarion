@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.ShowFleetStep3Page.php 2418 2012-11-10 16:07:52Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.ShowFleetStep3Page.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -132,12 +132,6 @@ class ShowFleetStep3Page extends AbstractPage
 			if ($targetType != 1) {
 				$this->printMessage($LNG['fl_only_planets_colonizable']);
 			}
-			
-			$techLevel	= PlayerUtil::allowPlanetPosition($targetPlanet);
-			
-			if($techLevel > $USER[$resource[124]]) {
-				$this->printMessage(sprintf($LNG['fl_tech_for_position_required'], $LNG['tech'][124], $techLevel));
-			}
 		}
 		
 		if ($targetMission == 7 || $targetMission == 15) {
@@ -162,7 +156,7 @@ class ShowFleetStep3Page extends AbstractPage
 		
 		if ($targetMission == 11)
 		{
-			$activeExpedition	= FleetFunctions::GetCurrentFleets($USER['userID'], 11);
+			$activeExpedition	= FleetFunctions::GetCurrentFleets($USER['id'], 11);
 			$maxExpedition		= FleetFunctions::getDMMissionLimit($USER);
 
 			if ($activeExpedition >= $maxExpedition) {
@@ -171,7 +165,7 @@ class ShowFleetStep3Page extends AbstractPage
 		}
 		elseif ($targetMission == 15)
 		{		
-			$activeExpedition	= FleetFunctions::GetCurrentFleets($USER['userID'], 15);
+			$activeExpedition	= FleetFunctions::GetCurrentFleets($USER['id'], 15);
 			$maxExpedition		= FleetFunctions::getExpeditionLimit($USER);
 			
 			if ($activeExpedition >= $maxExpedition) {
@@ -229,7 +223,7 @@ class ShowFleetStep3Page extends AbstractPage
 		}
 		
 		if($targetMission == 1 || $targetMission == 2 || $targetMission == 5 || $targetMission == 6 || $targetMission == 9) {
-			if(Config::get('adm_attack') == 1 && $usedPlanet['authattack'] > $USER['authlevel']) {
+			if(Config::get('adm_attack') == 1 && $targetPlayerData['authattack'] > $USER['authlevel']) {
 				$this->printMessage($LNG['fl_admin_attack']);
 			}
 		
@@ -244,22 +238,8 @@ class ShowFleetStep3Page extends AbstractPage
 			}
 		}
 
-		if ($targetMission == 5) {
-		
-			if($targetType == 3)
-			{
-				$ally_deposit	= $GLOBALS['DATABASE']->getFirstCell("SELECT ally_deposit FROM ".PLANETS." WHERE id_luna = ".$targetPlanetData['id'].";");
-				if ($ally_deposit < 1) {
-					$this->printMessage($LNG['fl_no_hold_depot']);
-				}
-			}
-			else
-			{
-				if ($targetPlanetData['ally_deposit'] < 1) {
-					$this->printMessage($LNG['fl_no_hold_depot']);
-				}
-			}
-					
+		if ($targetMission == 5)
+		{	
 			if($targetPlayerData['ally_id'] != $USER['ally_id']) {
 				$buddy	= $GLOBALS['DATABASE']->getFirstCell("
 				SELECT COUNT(*) FROM ".BUDDY." 
@@ -356,4 +336,3 @@ class ShowFleetStep3Page extends AbstractPage
 		$this->display('page.fleetStep3.default.tpl');
 	}
 }
-?>

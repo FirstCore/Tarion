@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.AbstractPage.php 2429 2012-11-14 22:52:50Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.AbstractPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -85,7 +85,7 @@ abstract class AbstractPage
 	
 	protected function getCronjobsTodo()
 	{
-		require ROOT_PATH.'includes/classes/Cronjob.class.php';
+		require_once ROOT_PATH.'includes/classes/Cronjob.class.php';
 		
 		$this->tplObj->assign_vars(array(	
 			'cronjobs'		=> Cronjob::getNeedTodoExecutedJobs()
@@ -154,15 +154,16 @@ abstract class AbstractPage
 			'current_pid'		=> $PLANET['id'],
 			'image'				=> $PLANET['image'],
 			'resourceTable'		=> $resourceTable,
-			'shortlyNumber'		=> $themeSettings['TOPNAV_SHORTLY_NUBMER'],
-			'closed'			=> !Config::get('game_disable') ? $LNG['ov_closed'] : false,
+			'shortlyNumber'		=> $themeSettings['TOPNAV_SHORTLY_NUMBER'],
+			'closed'			=> !Config::get('game_disable'),
+			'hasBoard'			=> filter_var(Config::get('forum_url'), FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED),
 			'hasAdminAccess'	=> isset($_SESSION['admin_login']),
 		));
 	}
 	
 	protected function getPageData() 
     {
-		global $USER, $LANG, $THEME;
+		global $USER, $THEME;
 		
 		if($this->getWindow() === 'full') {
 			$this->getNavigationData();
@@ -191,7 +192,6 @@ abstract class AbstractPage
 			'debug'				=> Config::get('debug'),
 			'VERSION'			=> Config::get('VERSION'),
 			'date'				=> explode("|", date('Y\|n\|j\|G\|i\|s\|Z', TIMESTAMP)),
-			'cron'				=> GetCrons(),
 			'REV'				=> substr(Config::get('VERSION'), -4),
 			'Offset'			=> $dateTimeUser->getOffset() - $dateTimeServer->getOffset(),
 			'queryString'		=> $this->getQueryString(),
@@ -222,7 +222,7 @@ abstract class AbstractPage
 	}
 	
 	protected function display($file) {
-		global $LANG, $THEME, $LNG;
+		global $THEME, $LNG;
 		
 		$this->save();
 		
@@ -231,7 +231,7 @@ abstract class AbstractPage
 		}
 		
 		$this->tplObj->assign_vars(array(
-            'lang'    		=> $LANG->getUser(),
+            'lang'    		=> $LNG->getLanguage(),
             'dpath'			=> $THEME->getTheme(),
 			'scripts'		=> $this->tplObj->jsscript,
 			'execscript'	=> implode("\n", $this->tplObj->script),

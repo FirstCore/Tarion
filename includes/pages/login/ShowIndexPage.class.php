@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowIndexPage.class.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: ShowIndexPage.class.php 2496 2013-01-01 13:26:23Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -37,7 +37,9 @@ class ShowIndexPage extends AbstractPage
 	}
 	
 	function show() 
-	{			
+	{
+		global $LNG;
+		
 		$referralID		= HTTP::_GP('ref', 0);
 		if(!empty($referralID))
 		{
@@ -53,12 +55,11 @@ class ShowIndexPage extends AbstractPage
 		}
 		
 		$Code	= HTTP::_GP('code', 0);
-		try
+		$loginCode	= false;
+		if(isset($LNG['login_error_'.$Code]))
 		{
-			$this->assign(array(
-				'code'	=> t('login_error_'.$Code),
-			));
-		} catch(Exception $e) { }
+			$loginCode	= $LNG['login_error_'.$Code];
+		}
 
 		$referralUniversum	= 0;
 		$referralUserID		= 0;
@@ -81,6 +82,7 @@ class ShowIndexPage extends AbstractPage
 			'referralUserID'		=> $referralUserID,
 			'referralUniversum'		=> $referralUniversum,
 			'universeSelect'		=> $universeSelect,
+			'code'					=> $loginCode,
 			'descHeader'			=> t('loginWelcome', Config::get('game_name')),
 			'descText'				=> t('loginServerDesc', Config::get('game_name')),
 			'loginInfo'				=> t('loginInfo', '<a href="index.php?page=rules">'.t('menu_rules').'</a>')

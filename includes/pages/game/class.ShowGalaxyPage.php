@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.ShowGalaxyPage.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.ShowGalaxyPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -47,12 +47,12 @@ class ShowGalaxyPage extends AbstractPage
 		$galaxyRight	= HTTP::_GP('galaxyRight', '');
 		$systemLeft		= HTTP::_GP('systemLeft', '');
 		$systemRight	= HTTP::_GP('systemRight', '');
-		$galaxy			= min(max(HTTP::_GP('galaxy', $PLANET['galaxy']), 1), Config::get('max_galaxy'));
-		$system			= min(max(HTTP::_GP('system', $PLANET['system']), 1), Config::get('max_system'));
-		$planet			= min(max(HTTP::_GP('planet', $PLANET['planet']), 1), Config::get('max_planets'));
+		$galaxy			= min(max(HTTP::_GP('galaxy', (int) $PLANET['galaxy']), 1), Config::get('max_galaxy'));
+		$system			= min(max(HTTP::_GP('system', (int) $PLANET['system']), 1), Config::get('max_system'));
+		$planet			= min(max(HTTP::_GP('planet', (int) $PLANET['planet']), 1), Config::get('max_planets'));
 		$type			= HTTP::_GP('type', 1);
 		$current		= HTTP::_GP('current', 0);
-			
+		
         if (!empty($galaxyLeft))
             $galaxy	= max($galaxy - 1, 1);
         elseif (!empty($galaxyRight))
@@ -74,8 +74,10 @@ class ShowGalaxyPage extends AbstractPage
             }
 		}
 
-        $targetDefensive    = array_diff($reslist['defense'], array(502));
+        $targetDefensive    = $reslist['defense'];
+        $targetDefensive[]	= 502;
 		$MissleSelector[0]	= $LNG['gl_all_defenses'];
+		
 		foreach($targetDefensive  as $Element)
 		{	
 			$MissleSelector[$Element] = $LNG['tech'][$Element];
@@ -127,4 +129,3 @@ class ShowGalaxyPage extends AbstractPage
 		$this->display('page.galaxy.default.tpl');
 	}
 }
-?>

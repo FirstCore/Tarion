@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.ShowSettingsPage.php 2460 2012-11-24 15:58:14Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.ShowSettingsPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -37,7 +37,7 @@ class ShowSettingsPage extends AbstractPage
 	
 	public function show()
 	{
-		global $USER, $LNG, $LANG, $CONF;
+		global $USER, $LNG, $CONF;
 		if($USER['urlaubs_modus'] == 1)
 		{
 			$this->tplObj->assign_vars(array(	
@@ -62,7 +62,7 @@ class ShowSettingsPage extends AbstractPage
 						1 => $LNG['op_sort_down']
 					), 
 					'Skins' => Theme::getAvalibleSkins(), 
-					'lang' => $LANG->getAllowedLangs(false)
+					'lang' => $LNG->getAllowedLangs(false)
 					),
 				'adminProtection'	=> $USER['authattack'],	
 				'userAuthlevel'		=> $USER['authlevel'],
@@ -84,6 +84,7 @@ class ShowSettingsPage extends AbstractPage
 				'galaxyBuddyList' 	=> $USER['settings_bud'],
 				'galaxyMissle' 		=> $USER['settings_mis'],
 				'galaxyMessage' 	=> $USER['settings_wri'],
+				'blockPM' 			=> $USER['settings_blockPM'],
 				'userid'		 	=> $USER['id'],
 				'ref_active'		=> Config::get('ref_active'),
 			));
@@ -171,7 +172,7 @@ class ShowSettingsPage extends AbstractPage
 	
 	private function sendDefault()
 	{
-		global $USER, $PLANET, $CONF, $LNG, $LANG, $UNI, $SESSION, $THEME;
+		global $USER, $PLANET, $CONF, $LNG, $UNI, $SESSION, $THEME;
 		
 		$adminprotection	= HTTP::_GP('adminprotection', 0);
 		
@@ -194,13 +195,14 @@ class ShowSettingsPage extends AbstractPage
 		$queueMessages		= HTTP::_GP('queueMessages', 0);	
 		$spyMessagesMode	= HTTP::_GP('spyMessagesMode', 0);
 
-		$spycount			= HTTP::_GP('spycount', 1);	
+		$spycount			= HTTP::_GP('spycount', 1.0);	
 		$fleetactions		= HTTP::_GP('fleetactions', 5);	
 		
 		$galaxySpy			= HTTP::_GP('galaxySpy', 0);	
 		$galaxyMessage		= HTTP::_GP('galaxyMessage', 0);	
 		$galaxyBuddyList	= HTTP::_GP('galaxyBuddyList', 0);	
 		$galaxyMissle		= HTTP::_GP('galaxyMissle', 0);
+		$blockPM			= HTTP::_GP('blockPM', 0);
 		
 		$vacation			= HTTP::_GP('vacation', 0);	
 		$delete				= HTTP::_GP('delete', 0);
@@ -208,8 +210,11 @@ class ShowSettingsPage extends AbstractPage
 		// Vertify
 		
 		$adminprotection	= ($adminprotection == 1 && $USER['authlevel'] != AUTH_USR) ? $USER['authlevel'] : 0;
-		$spycount			= max($spycount, 1);
-		$language			= array_key_exists($language, $LANG->getAllowedLangs(false)) ? $language : $LANG->getUser();		
+		
+		$spycount			= min(max(round($spycount), 1), 4294967295);
+		$fleetactions		= min(max($fleetactions, 1), 99);
+		
+		$language			= array_key_exists($language, $LNG->getAllowedLangs(false)) ? $language : $LNG->getLanguage();		
 		$theme				= array_key_exists($theme, Theme::getAvalibleSkins()) ? $theme : $THEME->getThemeName();
 		
 		$SQL				= "";
@@ -305,6 +310,7 @@ class ShowSettingsPage extends AbstractPage
 					settings_wri = ".$galaxyMessage.",
 					settings_bud = ".$galaxyBuddyList.",
 					settings_mis = ".$galaxyMissle.",
+					settings_blockPM = ".$blockPM.",
 					authattack = ".$adminprotection.",
 					lang = '".$language."',
 					hof = ".$queueMessages.",
@@ -316,4 +322,3 @@ class ShowSettingsPage extends AbstractPage
 		$this->printMessage($LNG['op_options_changed']);
 	}
 }
-?>

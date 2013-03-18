@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: MissionCaseFoundDM.php 2406 2012-10-31 10:27:25Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: MissionCaseFoundDM.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -47,9 +47,8 @@ class MissionCaseFoundDM extends MissionFunctions
 	
 	function EndStayEvent()
 	{
-		global $LANG;
-		$LNG			= $LANG->GetUserLang($this->_fleet['fleet_owner']);
-		$chance 		= mt_rand(0, 100);
+		$LNG	= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
+		$chance	= mt_rand(0, 100);
 		if($chance <= min(self::MAX_CHANCE, (self::CHANCE + $this->_fleet['fleet_amount'] * self::CHANCE_SHIP))) {
 			$FoundDark 	= mt_rand(self::MIN_FOUND, self::MAX_FOUND);
 			$this->UpdateFleet('fleet_resource_darkmatter', $FoundDark);
@@ -64,8 +63,7 @@ class MissionCaseFoundDM extends MissionFunctions
 	
 	function ReturnEvent()
 	{
-		global $LANG;
-		$LNG			= $LANG->GetUserLang($this->_fleet['fleet_owner']);
+		$LNG	= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
 		if($this->_fleet['fleet_resource_darkmatter'] > 0) {
 			SendSimpleMessage($this->_fleet['fleet_owner'], 0, $this->_fleet['fleet_end_time'], 15, $LNG['sys_mess_tower'], $LNG['sys_expe_report'], sprintf($LNG['sys_expe_back_home_with_dm'], $LNG['tech'][921], pretty_number($this->_fleet['fleet_resource_darkmatter']), $LNG['tech'][921]));
 			$this->UpdateFleet('fleet_array', '220,0;');
@@ -75,5 +73,3 @@ class MissionCaseFoundDM extends MissionFunctions
 		$this->RestoreFleet();
 	}
 }
-
-?>

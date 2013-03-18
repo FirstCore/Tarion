@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.statbuilder.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.statbuilder.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -90,6 +90,10 @@ class statbuilder
 		}	
 		
 		foreach($reslist['defense'] as $Defense){
+			$select_defenses	.= " SUM(p.".$resource[$Defense].") as ".$resource[$Defense].",";
+		}
+		
+		foreach($reslist['missile'] as $Defense){
 			$select_defenses	.= " SUM(p.".$resource[$Defense].") as ".$resource[$Defense].",";
 		}
 		
@@ -206,7 +210,7 @@ class statbuilder
 		$DefenseCounts = 0;
 		$DefensePoints = 0;
 				
-		foreach($reslist['defense'] as $Defense) {
+		foreach(array_merge($reslist['defense'], $reslist['missile']) as $Defense) {
 			if($USER[$resource[$Defense]] == 0) continue;
 			
 			$Units			= $pricelist[$Defense]['cost'][901] + $pricelist[$Defense]['cost'][902] + $pricelist[$Defense]['cost'][903];
@@ -515,10 +519,7 @@ class statbuilder
 
 		$this->SaveDataIntoDB($RankSQL);
 		$this->CheckUniverseAccounts($UniData);		
-		$this->writeRecordData();		
-		$this->AnotherCronJobs();		
+		$this->writeRecordData();	
 		return $this->SomeStatsInfos();
 	}
 }
-
-?>

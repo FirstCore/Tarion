@@ -21,8 +21,8 @@
  * @author Jan Kröpke <info@2moons.cc>
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: GeneralFunctions.php 2449 2012-11-18 12:34:18Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: GeneralFunctions.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -242,6 +242,7 @@ function _date($format, $time = null, $toTimeZone = null, $LNG = NULL) {
 		$time	= TIMESTAMP;
 	}
 	
+		
 	if(isset($toTimeZone))
 	{
 		$date = new DateTime();
@@ -328,6 +329,39 @@ function pretty_time($seconds)
 		$time .= $second.$LNG['short_second'].' ';
 	} else {
 		$time .= '0'.$second.$LNG['short_second'].' ';
+	}
+
+	return $time;
+}
+
+function pretty_fly_time($seconds)
+{
+	$hour	= floor($seconds / 3600);
+	$minute	= floor($seconds / 60 % 60);
+	$second	= floor($seconds % 60);
+	
+	$time  = '';
+	
+	if($hour >= 10) {
+		$time .= $hour;
+	} else {
+		$time .= '0'.$hour;
+	}
+	
+	$time .= ':';
+	
+	if($minute >= 10) {
+		$time .= $minute;
+	} else {
+		$time .= '0'.$minute;
+	}
+	
+	$time .= ':';
+	
+	if($second >= 10) {
+		$time .= $second;
+	} else {
+		$time .= '0'.$second;
 	}
 
 	return $time;
@@ -493,56 +527,12 @@ function ClearCache()
 			unlink(ROOT_PATH.$DIR.$FILE);
 		}
 	}
+	
+	require_once ROOT_PATH.'includes/classes/Cronjob.class.php';
+	Cronjob::reCalculateCronjobs();
+	$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET eco_hash = '';");
+	clearstatcache();
 }
-
-function allowPlanetPosition($Pos, $techLevel)
-{
-	// http://owiki.de/index.php/Astrophysik#.C3.9Cbersicht
-	
-	switch($Pos) {
-		case 1:
-		case 15:
-			return $techLevel >= 8;
-		break;
-		case 2:
-		case 14:
-			return $techLevel >= 6;
-		break;
-		case 3:
-		case 13:
-			return $techLevel >= 4;
-		break;
-		default:
-			return $techLevel >= 1;
-		break;
-	}
-	
-	
-	return min($GLOBALS['CONFIG'][$Universe]['min_player_planets'] + ceil($Level / 2) * PLANETS_PER_TECH, $GLOBALS['CONFIG'][$Universe]['max_player_planets']);
-}
-
-function GetCrons()
-{
-	global $CONF;
-	$Crons	= '';
-	$Crons .= TIMESTAMP >= (Config::get('stat_last_update') + (60 * Config::get('stat_update_time'))) ? '<img src="./cronjobs.php?cron=stats" alt="" height="1" width="1">' : '';
-	
-	$Crons .= Config::get('ts_modon') == 1 && TIMESTAMP >= (Config::get('ts_cron_last') + 60 * Config::get('ts_cron_interval')) ? '<img src="./cronjobs.php?cron=teamspeak" alt="" height="1" width="1">' : '';
-	
-	$Crons .= TIMESTAMP >= (Config::get('stat_last_db_update') + 86400) ? '<img src="./cronjobs.php?cron=daily" alt="" height="1" width="1">' : ''; //Daily Cronjob
-	
-	return $Crons;
-}
-
-function r_implode($glue, $pieces)
-{
-	$retVal	= array();
-	foreach($pieces as $r_pieces)
-	{
-		$retVal[] = is_array($r_pieces) ? r_implode($glue, $r_pieces) : $r_pieces;
-	}
-	return implode($glue, $retVal);
-} 
 
 function allowedTo($side)
 {
@@ -678,6 +668,7 @@ function exceptionHandler($exception)
 	}
 	
 	$DIR		= MODE == 'INSTALL' ? '..' : '.';
+	ob_start();
 	echo '<!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="de" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="de" class="no-js ie7"> <![endif]-->
@@ -743,12 +734,14 @@ function exceptionHandler($exception)
 			<b>PHP-API: </b>'.php_sapi_name().'<br>
 			<b>MySQL-Cleint-Version: </b>'.mysqli_get_client_info().'<br>
 			<b>2Moons Version: </b>'.$VERSION.'<br>
-			<b>Debug Backtrace:</b><br>'.makebr(str_replace(ROOT_PATH, '/', htmlspecialchars(str_replace('\\', '/',$exception->getTraceAsString())))).'
+			<b>Debug Backtrace:</b><br>'.makebr(htmlspecialchars($exception->getTraceAsString())).'
 		</td>
 	</tr>
 </table>
 </body>
 </html>';
+
+	echo str_replace(array('\\', ROOT_PATH, substr(ROOT_PATH, 0, 15)), array('/', '/', 'FILEPATH '), ob_get_clean());
 	
 	$errorText	= date("[d-M-Y H:i:s]", TIMESTAMP).' '.$errorType[$errno].': "'.strip_tags($exception->getMessage())."\"\r\n";
 	$errorText	.= 'File: '.$exception->getFile().' | Line: '.$exception->getLine()."\r\n";

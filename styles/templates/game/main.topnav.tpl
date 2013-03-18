@@ -73,8 +73,8 @@
 		</table>
 		{if !$vmode}
 		<script type="text/javascript">
-		var shortly_number	= {$shortlyNumber|json}
-		var vacation		= {$vmode};
+		var viewShortlyNumber	= {$shortlyNumber|json}
+		var vacation			= {$vmode};
 		{foreach $resourceTable as $resourceID => $resouceData}
 		{if isset($resouceData.production)}
 		resourceTicker({
@@ -89,7 +89,7 @@
 		{/if}
 	</div>
 	{if $closed}
-	<div class="infobox">{$closed}</div>
+	<div class="infobox">{$LNG.ov_closed}</div>
 	{elseif $delete}
 	<div class="infobox">{$delete}</div>
 	{elseif $vacation}

@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: class.ShowShipyardPage.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: class.ShowShipyardPage.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
  
@@ -92,7 +92,7 @@ class ShowShipyardPage extends AbstractPage
 		foreach($fmenge as $Element => $Count)
 		{
 			if(empty($Count)
-				|| !in_array($Element, array_merge($reslist['fleet'], $reslist['defense']))
+				|| !in_array($Element, array_merge($reslist['fleet'], $reslist['defense'], $reslist['missile']))
 				|| !BuildFunctions::isTechnologieAccessible($USER, $PLANET, $Element)
 			) {
 				continue;
@@ -104,7 +104,7 @@ class ShowShipyardPage extends AbstractPage
 			$Count 			= min($Count, $MaxElements);
 			
 			$BuildArray    	= !empty($PLANET['b_hangar_id']) ? unserialize($PLANET['b_hangar_id']) : array();
-			if ($Element == 502 || $Element == 503)
+			if (in_array($Element, $reslist['missile']))
 			{
 				$MaxMissiles		= BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $Missiles);
 				$Count 				= min($Count, $MaxMissiles[$Element]);
@@ -220,15 +220,17 @@ class ShowShipyardPage extends AbstractPage
 		$mode		= HTTP::_GP('mode', 'fleet');
 		
 		if($mode == 'defense') {
-			$elementIDs	= $reslist['defense'];
+			$elementIDs	= array_merge($reslist['defense'], $reslist['missile']);
 		} else {
 			$elementIDs	= $reslist['fleet'];
 		}
 		
-		$Missiles	= array(
-			502	=> $PLANET[$resource[502]],
-			503	=> $PLANET[$resource[503]],
-		);
+		$Missiles	= array();
+		
+		foreach($reslist['missile'] as $elementID)
+		{
+			$Missiles[$elementID]	= $PLANET[$resource[$elementID]];
+		}
 		
 		$MaxMissiles	= BuildFunctions::getMaxConstructibleRockets($USER, $PLANET, $Missiles);
 		
@@ -272,4 +274,3 @@ class ShowShipyardPage extends AbstractPage
 		$this->display('page.shipyard.default.tpl');
 	}
 }
-?>

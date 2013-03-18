@@ -2,7 +2,7 @@
 
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan KrÃ¶pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan KrÃ¶pke <info@2moons.cc>
+ * @copyright 2012 Jan KrÃ¶pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
- * @version 1.7.0 (2012-12-31)
- * @info $Id: MissionCaseRecycling.php 2414 2012-11-02 22:08:33Z slaver7 $
+ * @version 1.7.2 (2013-03-18)
+ * @info $Id: MissionCaseRecycling.php 2632 2013-03-18 19:05:14Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -35,7 +35,7 @@ class MissionCaseRecycling extends MissionFunctions
 	
 	function TargetEvent()
 	{	
-		global $pricelist, $LANG, $reslist, $resource;
+		global $pricelist, $reslist, $resource;
 		
 		$resourceIDs	= array(901, 902, 903, 921);
 		$debrisIDs		= array(901, 902);
@@ -87,7 +87,7 @@ class MissionCaseRecycling extends MissionFunctions
 			$incomingGoods		= 0;
 			foreach($resourceIDs as $resourceID)
 			{
-				$incomingGoods	+= $this->_fleet['fleet_resource_'.$resource[$debrisID]];
+				$incomingGoods	+= $this->_fleet['fleet_resource_'.$resource[$resourceID]];
 			}
 			
 			$totalStorage = $recyclerStorage + min(0, $otherFleetStorage - $incomingGoods);
@@ -104,11 +104,11 @@ class MissionCaseRecycling extends MissionFunctions
 			$GLOBALS['DATABASE']->query("UPDATE ".PLANETS." SET ".implode(',', $collectQuery)." WHERE id = ".$this->_fleet['fleet_end_id'].";");
 		}
 		
-		$LNG			= $LANG->GetUserLang($this->_fleet['fleet_owner']);
+		$LNG		= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
 		
-		$Message 		= sprintf($LNG['sys_recy_gotten'], 
-								  pretty_number($collectedGoods[901]), $LNG['tech'][901], 
-								  pretty_number($collectedGoods[902]), $LNG['tech'][902]
+		$Message 	= sprintf($LNG['sys_recy_gotten'], 
+							  pretty_number($collectedGoods[901]), $LNG['tech'][901], 
+							  pretty_number($collectedGoods[902]), $LNG['tech'][902]
 		);
 						
 		SendSimpleMessage($this->_fleet['fleet_owner'], 0, $this->_fleet['fleet_start_time'], 5, $LNG['sys_mess_tower'], $LNG['sys_recy_report'], $Message);
@@ -123,10 +123,8 @@ class MissionCaseRecycling extends MissionFunctions
 	
 	function ReturnEvent()
 	{
-		global $LANG;
-		$LNG		= $LANG->GetUserLang($this->_fleet['fleet_owner']);
-		
-		$TargetName	= $GLOBALS['DATABASE']->getFirstCell("SELECT name FROM ".PLANETS." WHERE id = ".$this->_fleet['fleet_end_id'].";");
+		$LNG		= $this->getLanguage(NULL, $this->_fleet['fleet_owner']);
+		$TargetName	= $GLOBALS['DATABASE']->getFirstCell("SELECT name FROM ".PLANETS." WHERE id = ".$this->_fleet['fleet_start_id'].";");
 	
 		$Message	= sprintf($LNG['sys_tran_mess_owner'], $TargetName, GetStartAdressLink($this->_fleet, ''), pretty_number($this->_fleet['fleet_resource_metal']), $LNG['tech'][901], pretty_number($this->_fleet['fleet_resource_crystal']), $LNG['tech'][902], pretty_number($this->_fleet['fleet_resource_deuterium']), $LNG['tech'][903] );
 		SendSimpleMessage($this->_fleet['fleet_owner'], 0, $this->_fleet['fleet_end_time'], 5, $LNG['sys_mess_tower'], $LNG['sys_mess_fleetback'], $Message);
@@ -134,4 +132,3 @@ class MissionCaseRecycling extends MissionFunctions
 		$this->RestoreFleet();
 	}
 }
-?>
