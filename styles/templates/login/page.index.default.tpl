@@ -2,12 +2,12 @@
 {block name="content"}
 <div id="content">
 	<section>
-		<table class="box-out">
+	   <!-- <table class="box-out">
 			<tr class="box-out-header">
 				<td class="box-out-header-left"></td>
 				<td class="box-out-header-center"></td>
 				<td class="box-out-header-right"></td>
-			</tr>
+			</tr> -->
 			<tr class="box-out-content">
 				<td class="box-out-content-left"></td>
 				<td class="box-out-content-center">
@@ -29,16 +29,16 @@
 							<td class="box-inner-footer-center"></td>
 							<td class="box-inner-footer-right"></td>
 						</tr>
-					</table>
+				    </table>
 				</td>
-				<td class="box-out-content-right"></td>
+			    <td class="box-out-content-right"></td>
 			</tr>
-			<tr class="box-out-footer">
+		<!-- <tr class="box-out-footer">
 				<td class="box-out-footer-left"></td>
 				<td class="box-out-footer-center"></td>
 				<td class="box-out-footer-right"></td>
-			</tr>
-		</table>
+			</tr> -->
+		</table> 
 	</section>
 </div>
 <section>

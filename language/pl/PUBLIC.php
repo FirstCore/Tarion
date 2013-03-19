@@ -27,14 +27,14 @@
  */
 
 // Site Title
-$LNG['siteTitleIndex']				= 'Index';
+$LNG['siteTitleIndex']				= 'Home';
 $LNG['siteTitleRegister']			= 'Rejestracja';
 $LNG['siteTitleScreens']			= 'Screenshots';
-$LNG['siteTitleBanList']			= 'Prengierz';
-$LNG['siteTitleBattleHall']			= 'Hala sław';
+$LNG['siteTitleBanList']			= 'Ban Lista';
+$LNG['siteTitleBattleHall']			= 'Ranking PvP';
 $LNG['siteTitleRules']				= 'Regulamin';
 $LNG['siteTitleNews']				= 'News';
-$LNG['siteTitleDisclamer']			= 'Impressum';
+$LNG['siteTitleDisclamer']			= 'Kontakt';
 $LNG['siteTitleLostPassword']		= 'Zapomniałem hasło?';
 
 // Menu
@@ -42,9 +42,9 @@ $LNG['forum']						= 'Forum';
 $LNG['menu_index']					= 'Home';
 $LNG['menu_news']					= 'News';
 $LNG['menu_rules']					= 'Regulamin';
-$LNG['menu_banlist']				= 'Prengierz';
-$LNG['menu_battlehall']				= 'Hala sław';
-$LNG['menu_disclamer']				= 'Impressum';
+$LNG['menu_banlist']				= 'Ban Lista';
+$LNG['menu_battlehall']				= 'Ranking PvP';
+$LNG['menu_disclamer']				= 'Kontakt';
 $LNG['menu_register']				= 'Rejestracja';
 
 // Universe select
@@ -168,7 +168,7 @@ $LNG['news_overview']				= 'News';
 $LNG['news_from']					= 'Od %s do %s';
 $LNG['news_does_not_exist']			= 'Brak postów!';
 
-//Impressum
+//Kontakt
 $LNG['disclamerLabelAddress']		= 'Adres:';
 $LNG['disclamerLabelPhone']			= 'Telefon Nr.:';
 $LNG['disclamerLabelMail']			= 'E-Mail Adres:';
