@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: CreateOnePlanetRecord.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: CreateOnePlanetRecord.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -48,7 +48,7 @@ function CreateOnePlanetRecord($Galaxy, $System, $Position, $Universe, $PlanetOw
 	}
 
 	$FieldFactor		= Config::get('planet_factor');
-	require(ROOT_PATH.'includes/PlanetData.php');
+	require('includes/PlanetData.php');
 	$Pos                = ceil($Position / (Config::get('max_planets') / count($PlanetData))); 
 	$TMax				= $PlanetData[$Pos]['temp'];
 	$TMin				= $TMax - 40;

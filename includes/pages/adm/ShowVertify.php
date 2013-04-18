@@ -23,7 +23,7 @@
  * @copyright 2011 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.0 (2011-12-10)
- * @info $Id: ShowVertify.php 2490 2012-12-27 16:21:07Z slaver7 $
+ * @info $Id: ShowVertify.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -80,13 +80,13 @@ function ShowVertify()
 		break;
 		case 'getFileList':
 			echo json_encode(array_merge(
-				dir_tree(ROOT_PATH, $EXT, false), 
-				dir_tree(ROOT_PATH.'chat/', $EXT),
-				dir_tree(ROOT_PATH.'includes/', $EXT),
-				dir_tree(ROOT_PATH.'includes/', $EXT),
-				dir_tree(ROOT_PATH.'language/', $EXT),
-				dir_tree(ROOT_PATH.'scripts/', $EXT),
-				dir_tree(ROOT_PATH.'styles/', $EXT)
+				dir_tree('./', $EXT, false), 
+				dir_tree('chat/', $EXT),
+				dir_tree('includes/', $EXT),
+				dir_tree('includes/', $EXT),
+				dir_tree('language/', $EXT),
+				dir_tree('scripts/', $EXT),
+				dir_tree('styles/', $EXT)
 			));
 			exit;
 		break;

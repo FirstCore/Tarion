@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: SQLDumper.class.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: SQLDumper.class.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -52,7 +52,7 @@ class SQLDumper
 	
 	private function nativeDumpToFile($dbTables, $filePath)
 	{
-		require ROOT_PATH.'includes/config.php';
+		require 'includes/config.php';
 		$dbTables	= array_map('escapeshellarg', $dbTables);
 		$sqlDump	= shell_exec("mysqldump --host='".escapeshellarg($database['host'])."' --port=".((int) $database['port'])." --user='".escapeshellarg($database['user'])."' --password='".escapeshellarg($database['userpw'])."' --no-create-db --order-by-primary --add-drop-table --comments --complete-insert --hex-blob '".escapeshellarg($database['databasename'])."' ".implode(' ', $dbTables)." 2>&1 1> ".$filePath);
 		if(strlen($sqlDump) !== 0) #mysqldump error
@@ -64,7 +64,7 @@ class SQLDumper
 	private function softwareDumpToFile($dbTables, $filePath)
 	{
 		$this->setTimelimit();
-		require ROOT_PATH.'includes/config.php';
+		require 'includes/config.php';
 		$intergerTypes	= array('tinyint', 'smallint', 'mediumint', 'int', 'bigint', 'decimal', 'float', 'double', 'real');
 		$gameVersion	= Config::get('VERSION');
 		$serverVersion	= $GLOBALS['DATABASE']->getServerVersion();

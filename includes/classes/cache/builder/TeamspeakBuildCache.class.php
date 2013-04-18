@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: TeamspeakBuildCache.class.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: TeamspeakBuildCache.class.php 2641 2013-03-24 13:43:52Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -30,18 +30,16 @@
 class TeamspeakBuildCache
 {
 	function buildCache()
-	{
-		global $CONF;
-		
+	{		
 		$teamspeakData	= array();
 		
-		switch($CONF['ts_version'])
+		switch(Config::get('ts_version'))
 		{
 			case 2:
-				include_once(ROOT_PATH.'includes/libs/teamspeak/class.teamspeak2.php');
+				require 'includes/libs/teamspeak/cyts/cyts.class.php';
 				$ts = new cyts();
 				
-				if($ts->connect($CONF['ts_server'], $CONF['ts_tcpport'], $CONF['ts_udpport'], $CONF['ts_timeout'])) {
+				if($ts->connect(Config::get('ts_server'), Config::get('ts_tcpport'), Config::get('ts_udpport'), Config::get('ts_timeout'))) {
 					$serverInfo	= $ts->info_serverInfo();
 					$teamspeakData	= array(
 						'password'	=> '', // NO Server-API avalible.
@@ -54,21 +52,21 @@ class TeamspeakBuildCache
 				}
 			break;
 			case 3:
-				require_once(ROOT_PATH . "includes/libs/teamspeak/class.teamspeak3.php");
-				$tsAdmin 	= new ts3admin($CONF['ts_server'], $CONF['ts_udpport'], $CONF['ts_timeout']);
+				require 'includes/libs/teamspeak/class.teamspeak3.php';
+				$tsAdmin 	= new ts3admin(Config::get('ts_server'), Config::get('ts_udpport'), Config::get('ts_timeout'));
 				$connected	= $tsAdmin->connect();				
 				if(!$connected['success'])
 				{
 					throw new Exception('Teamspeak-Error: '.implode("<br>\r\n", $connected['errors']));
 				}
 				
-				$selected	= $tsAdmin->selectServer($CONF['ts_tcpport'], 'port', true);
+				$selected	= $tsAdmin->selectServer(Config::get('ts_tcpport'), 'port', true);
 				if(!$selected['success'])
 				{
 					throw new Exception('Teamspeak-Error: '.implode("<br>\r\n", $selected['errors']));
 				}
 					
-				$loggedIn	= $tsAdmin->login($CONF['ts_login'], $CONF['ts_password']);
+				$loggedIn	= $tsAdmin->login(Config::get('ts_login'), Config::get('ts_password'));
 				if(!$loggedIn['success'])
 				{
 					throw new Exception('Teamspeak-Error: '.implode("<br>\r\n", $loggedIn['errors']));

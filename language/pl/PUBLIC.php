@@ -27,24 +27,24 @@
  */
 
 // Site Title
-$LNG['siteTitleIndex']				= 'Home';
+$LNG['siteTitleIndex']				= 'Index';
 $LNG['siteTitleRegister']			= 'Rejestracja';
 $LNG['siteTitleScreens']			= 'Screenshots';
-$LNG['siteTitleBanList']			= 'Ban Lista';
-$LNG['siteTitleBattleHall']			= 'Ranking PvP';
+$LNG['siteTitleBanList']			= 'Prengierz';
+$LNG['siteTitleBattleHall']			= 'Hala sław';
 $LNG['siteTitleRules']				= 'Regulamin';
 $LNG['siteTitleNews']				= 'News';
-$LNG['siteTitleDisclamer']			= 'Kontakt';
+$LNG['siteTitleDisclamer']			= 'Impressum';
 $LNG['siteTitleLostPassword']		= 'Zapomniałem hasło?';
 
 // Menu
 $LNG['forum']						= 'Forum';
-$LNG['menu_index']					= 'Home';
+$LNG['menu_index']					= 'IndeX';
 $LNG['menu_news']					= 'News';
 $LNG['menu_rules']					= 'Regulamin';
-$LNG['menu_banlist']				= 'Ban Lista';
-$LNG['menu_battlehall']				= 'Ranking PvP';
-$LNG['menu_disclamer']				= 'Kontakt';
+$LNG['menu_banlist']				= 'Prengierz';
+$LNG['menu_battlehall']				= 'Hala sław';
+$LNG['menu_disclamer']				= 'Impressum';
 $LNG['menu_register']				= 'Rejestracja';
 
 // Universe select
@@ -58,16 +58,11 @@ $LNG['buttonScreenshot']			= 'Screenshots';
 $LNG['buttonLostPassword']			= 'Zapomniałem hasło?';
 
 // Start
-$LNG['gameInformations']	        = array(
-"Dołącz do najlepszych już teraz i zostań najpotężniejszym z nich.<br/><br/>
-
-Tarion.net jest darmową grą strategiczno-ekonomiczno osadzoną w realiach wszechogarniającego kosmosu.<br/>
-To najlepszy sposób na nudę, setki a nawet tysiące graczy spotyka się w świecie aby rozgrywać wspaniałe boje kosmiczne. <br/>
-Grając u nas poznasz masę graczy, zawiążesz sojusze, stworzysz swoje niepowtarzalne i ogromne Imperium, którego potęga bedzie siać postrach wobec twoich wrogów.<br/><br/>
-
-Urokliwy klimat jaki proponuje Tarion w Galaktycznym świecie jest nie do odrzucenia. Stań się kosmicznym władcą. Niech inni gracze drżą na samą myśl o Tobie!<br/><br/>
-
-Nie czekaj załóż Konto już TERAZ! To tylko parę minut! Galaktyka potrzebuję Cię.",
+$LNG['gameInformations']			= array(
+	'Gra online strategiczno-ekonomiczna czasu rzeczywistego w kosmosie.',
+	'Graj przeciwko innym graczom.',
+	'Nic nie musisz sciągać, grasz w przeglądarce !.',
+	'Darmowa rejestracja',
 );
 
 // Login
@@ -168,7 +163,7 @@ $LNG['news_overview']				= 'News';
 $LNG['news_from']					= 'Od %s do %s';
 $LNG['news_does_not_exist']			= 'Brak postów!';
 
-//Kontakt
+//Impressum
 $LNG['disclamerLabelAddress']		= 'Adres:';
 $LNG['disclamerLabelPhone']			= 'Telefon Nr.:';
 $LNG['disclamerLabelMail']			= 'E-Mail Adres:';

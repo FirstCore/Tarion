@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: MissionCaseSpy.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: MissionCaseSpy.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -129,7 +129,7 @@ class MissionCaseSpy extends MissionFunctions
 		
 		// I'm use template class here, because i want to exclude HTML in PHP.
 		
-		require_once(ROOT_PATH.'includes/classes/class.template.php');
+		require_once('includes/classes/class.template.php');
 		
 		$template	= new template;
 		

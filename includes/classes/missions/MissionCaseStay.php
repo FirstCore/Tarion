@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: MissionCaseStay.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: MissionCaseStay.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -41,7 +41,7 @@ class MissionCaseStay extends MissionFunctions
 		$fleetArray			= fleetAmountToArray($this->_fleet['fleet_array']);
 		$duration			= $this->_fleet['fleet_start_time'] - $this->_fleet['start_time'];
 		
-		require_once(ROOT_PATH . 'includes/classes/class.FleetFunctions.php');
+		require_once('includes/classes/class.FleetFunctions.php');
 		
 		$fleetMaxSpeed 		= FleetFunctions::GetFleetMaxSpeed($fleetArray, $senderUser);
 		$SpeedFactor    	= FleetFunctions::GetGameSpeedFactor();

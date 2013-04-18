@@ -22,18 +22,19 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: userpic.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: userpic.php 2643 2013-03-26 17:13:31Z slaver7 $
  * @link http://2moons.cc/
  */
 
 define('MODE', 'BANNER');
 define('ROOT_PATH', str_replace('\\', '/',dirname(__FILE__)).'/');
+set_include_path(ROOT_PATH);
 
 if(!extension_loaded('gd')) {
 	clearGIF();
 }
 
-require(ROOT_PATH . 'includes/common.php');
+require 'includes/common.php';
 $id = HTTP::_GP('id', 0);
 
 if(!isModulAvalible(MODULE_BANNER) || $id == 0) {
@@ -44,7 +45,7 @@ $LNG = new Language;
 $LNG->getUserAgentLanguage();
 $LNG->includeData(array('L18N', 'BANNER', 'CUSTOM'));
 
-require_once(ROOT_PATH."includes/classes/class.StatBanner.php");
+require 'includes/classes/class.StatBanner.php';
 
 $banner = new StatBanner();
 $Data	= $banner->GetData($id);

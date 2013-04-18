@@ -1,6 +1,6 @@
 /**
  *  2Moons
- *  Copyright (C) 2012 Jan Kröpke
+ *  Copyright (C) 2012 Jan Krï¿½pke
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @package 2Moons
- * @author Jan Kröpke <info@2moons.cc>
- * @copyright 2012 Jan Kröpke <info@2moons.cc>
+ * @author Jan Krï¿½pke <info@2moons.cc>
+ * @copyright 2012 Jan Krï¿½pke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: install.sql 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: install.sql 2676 2013-04-18 09:57:03Z lordmegger@googlemail.com $
  * @link http://2moons.cc/
  */
 
@@ -307,7 +307,7 @@ CREATE TABLE `%PREFIX%cronjobs` (
   `month` varchar(32) NOT NULL,
   `dow` varchar(32) NOT NULL,
   `class` varchar(32) NOT NULL,
-  `nextTime` int(11) DEFAULT NULL,
+  `nextTime` int(11) NOT NULL DEFAULT '0',
   `lock` varchar(32) DEFAULT NULL,
   UNIQUE KEY `cronjobID` (`cronjobID`),
   KEY `isActive` (`isActive`,`nextTime`,`lock`,`cronjobID`)

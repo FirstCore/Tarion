@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: MissionCaseColonisation.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: MissionCaseColonisation.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -62,7 +62,7 @@ class MissionCaseColonisation extends MissionFunctions
 		}		
 		else
 		{
-			require_once(ROOT_PATH.'includes/functions/CreateOnePlanetRecord.php');
+			require_once('includes/functions/CreateOnePlanetRecord.php');
 			$NewOwnerPlanet = CreateOnePlanetRecord($this->_fleet['fleet_end_galaxy'], $this->_fleet['fleet_end_system'], $this->_fleet['fleet_end_planet'], $this->_fleet['fleet_universe'], $this->_fleet['fleet_owner'], $LNG['fcp_colony'], false, $senderUser['authlevel']);
 			if($NewOwnerPlanet === false)
 			{

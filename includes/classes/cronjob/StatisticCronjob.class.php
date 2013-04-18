@@ -23,7 +23,7 @@
  * @copyright 2011 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.0 (2011-12-10)
- * @info $Id: StatisticCronjob.class.php 2490 2012-12-27 16:21:07Z slaver7 $
+ * @info $Id: StatisticCronjob.class.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://code.google.com/p/2moons/
  */
 
@@ -32,7 +32,7 @@ class StatisticCronjob
 {
 	function run()
 	{
-		require_once(ROOT_PATH.'includes/classes/class.statbuilder.php');
+		require_once('includes/classes/class.statbuilder.php');
 		$stat			= new Statbuilder();
 		$result			= $stat->MakeStats();
 		Config::update(array(

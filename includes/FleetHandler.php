@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: FleetHandler.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: FleetHandler.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
  
@@ -33,7 +33,7 @@ $token			= getRandomString();
 $fleetResult	= $GLOBALS['DATABASE']->query("UPDATE ".FLEETS_EVENT." SET `lock` = '".$token."' WHERE `lock` IS NULL AND `time` <= ". TIMESTAMP .";");
 
 if($GLOBALS['DATABASE']->affectedRows() !== 0) {
-	require_once(ROOT_PATH . 'includes/classes/class.FlyingFleetHandler.php');
+	require_once('includes/classes/class.FlyingFleetHandler.php');
 	
 	$fleetObj	= new FlyingFleetHandler();
 	$fleetObj->setToken($token);

@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowExternalAuthPage.class.php 2618 2013-03-11 19:36:08Z slaver7 $
+ * @info $Id: ShowExternalAuthPage.class.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -42,13 +42,13 @@ class ShowExternalAuthPage extends AbstractPage
 		$method			= HTTP::_GP('method', '');
 		$method			= strtolower(str_replace(array('_', '\\', '/', '.', "\0"), '', $method));
 		
-		if(!file_exists(ROOT_PATH.'includes/extauth/'.$method.'.class.php')) {
+		if(!file_exists('includes/extauth/'.$method.'.class.php')) {
 			HTTP::redirectTo('index.php');			
 		}
 		
 		Session::init();
 		
-		require(ROOT_PATH.'includes/extauth/'.$method.'.class.php');
+		require('includes/extauth/'.$method.'.class.php');
 		
 		$methodClass	= ucwords($method).'Auth';
 		$authObj		= new $methodClass;

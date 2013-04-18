@@ -22,12 +22,12 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: class.GalaxyRows.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: class.GalaxyRows.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
-require_once(ROOT_PATH . 'includes/classes/class.FleetFunctions.php');
-require_once(ROOT_PATH . 'includes/pages/game/class.ShowPhalanxPage.php');
+require_once('includes/classes/class.FleetFunctions.php');
+require_once('includes/pages/game/class.ShowPhalanxPage.php');
 
 class GalaxyRows
 {

@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowVertifyPage.class.php 2496 2013-01-01 13:26:23Z slaver7 $
+ * @info $Id: ShowVertifyPage.class.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -54,7 +54,7 @@ class ShowVertifyPage extends AbstractPage
 		list($userID, $planetID) = PlayerUtil::createPlayer($userData['universe'], $userData['userName'], $userData['password'], $userData['email'], $userData['language']);
 		
 		if(Config::get('mail_active', $userData['universe']) == 1) {
-			require(ROOT_PATH.'includes/classes/Mail.class.php');
+			require('includes/classes/Mail.class.php');
 			$MailSubject	= t('registerMailCompleteTitle', Config::get('game_name', $userData['universe']));	
 			$MailRAW		= $GLOBALS['LNG']->getTemplate('email_reg_done');
 			$MailContent	= str_replace(array(

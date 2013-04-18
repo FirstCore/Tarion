@@ -22,14 +22,16 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: root.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: root.php 2643 2013-03-26 17:13:31Z slaver7 $
  * @link http://2moons.cc/
  */
 
 define('MODE', 'LOGIN');
 define('ROOT_PATH'	, str_replace('\\', '/',dirname(__FILE__)).'/');
+set_include_path(ROOT_PATH);
 
-require(ROOT_PATH . 'includes/common.php');
+require('includes/common.php');
+
 $LNG->includeData(array('L18N', 'INGAME', 'ADMIN'));
 
 if(isset($_REQUEST['admin_pw']))

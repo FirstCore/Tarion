@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: ADMIN.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: ADMIN.php 2639 2013-03-19 20:00:23Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -649,7 +649,7 @@ $LNG['mu_dump']						= 'Datenbank-Backup';
 
 $LNG['vt_error']					= 'HashFile ist nicht verfügbar! - Update durchführen!';
 $LNG['vt_fail']						= 'Geänderte Dateien';
-$LNG['vt_info']						= 'Diese Liste enthält die Dateien, die modifziert worden und nicht dem orginal entsprechen.<br>Wenn Sie selbst nichts am Spiel geändert haben, sollte Sie die Dateien mit dem Orginalen ersetzten.';
+$LNG['vt_info']						= 'Diese Liste enthält die Dateien, die modifziert wurden und nicht dem orginal entsprechen.<br>Wenn Sie selbst nichts am Spiel geändert haben, sollte Sie die Dateien mit dem Orginalen ersetzten.';
 $LNG['vt_head']						= 'Überprüfe Spieldateien';
 $LNG['vt_filephp']					= 'PHP-Dateien';
 $LNG['vt_filetpl']					= 'Template-Dateien';

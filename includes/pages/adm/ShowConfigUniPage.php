@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: ShowConfigUniPage.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: ShowConfigUniPage.php 2675 2013-04-18 09:34:27Z lordmegger@googlemail.com $
  * @link http://2moons.cc/
  */
 
@@ -80,6 +80,7 @@ function ShowConfigUniPage()
 			'max_elements_build'	=> $CONF['max_elements_build'],
 			'max_elements_tech'		=> $CONF['max_elements_tech'],
 			'max_elements_ships'	=> $CONF['max_elements_ships'],
+            'max_fleet_per_build'   => $CONF['max_fleet_per_build'],
 			'max_overflow'			=> $CONF['max_overflow'],
 			'moon_factor'			=> $CONF['moon_factor'],
 			'moon_chance'			=> $CONF['moon_chance'],
@@ -206,6 +207,7 @@ function ShowConfigUniPage()
 			'max_elements_build'	=> $max_elements_build,
 			'max_elements_tech'		=> $max_elements_tech,
 			'max_elements_ships'	=> $max_elements_ships,
+            'max_fleet_per_build'   => $max_fleet_per_build,
 			'max_overflow'			=> $max_overflow,
 			'moon_factor'			=> $moon_factor,
 			'moon_chance'			=> $moon_chance,
@@ -322,7 +324,6 @@ function ShowConfigUniPage()
 		'se_google_active'				=> $LNG['se_google_active'],
 		'se_google_info'				=> $LNG['se_google_info'],
 		'se_google_key'					=> $LNG['se_google_key'],
-		'se_google_key_info'			=> $LNG['se_google_key_info'],
 		'se_google_key_info'			=> $LNG['se_google_key_info'],
 		'se_save_parameters'			=> $LNG['se_save_parameters'],
 		'se_max_galaxy'					=> $LNG['se_max_galaxy'],

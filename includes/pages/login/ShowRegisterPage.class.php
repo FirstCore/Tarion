@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowRegisterPage.class.php 2496 2013-01-01 13:26:23Z slaver7 $
+ * @info $Id: ShowRegisterPage.class.php 2641 2013-03-24 13:43:52Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -61,9 +61,9 @@ class ShowRegisterPage extends AbstractPage
 			$externalAuth['method']		= strtolower(str_replace(array('_', '\\', '/', '.', "\0"), '', $externalAuth['method']));
 		}
 		
-		if(!empty($externalAuth['account']) && file_exists(ROOT_PATH.'includes/extauth/'.$externalAuth['method'].'.class.php'))
+		if(!empty($externalAuth['account']) && file_exists('includes/extauth/'.$externalAuth['method'].'.class.php'))
 		{
-			require(ROOT_PATH.'includes/extauth/'.$externalAuth['method'].'.class.php');
+			require('includes/extauth/'.$externalAuth['method'].'.class.php');
 			$methodClass	= ucwords($externalAuth['method']).'Auth';
 			$authObj		= new $methodClass;
 			
@@ -218,9 +218,9 @@ class ShowRegisterPage extends AbstractPage
 			)));
 		}
 		
-		if(!empty($externalAuth['account']) && file_exists(ROOT_PATH.'includes/extauth/'.$externalAuthMethod.'.class.php'))
+		if(!empty($externalAuth['account']) && file_exists('includes/extauth/'.$externalAuthMethod.'.class.php'))
 		{
-			require(ROOT_PATH.'includes/extauth/'.$externalAuthMethod.'.class.php');
+			require('includes/extauth/'.$externalAuthMethod.'.class.php');
 			$methodClass	= ucwords($externalAuthMethod).'Auth';
 			$authObj		= new $methodClass;
 			
@@ -275,7 +275,7 @@ class ShowRegisterPage extends AbstractPage
 		}
 		else
 		{
-			require(ROOT_PATH.'includes/classes/Mail.class.php');
+			require('includes/classes/Mail.class.php');
 			$MailSubject 	= t('registerMailVertifyTitle');
 			$MailRAW		= $GLOBALS['LNG']->getTemplate('email_vaild_reg');
 			$MailContent	= str_replace(array(
@@ -292,13 +292,7 @@ class ShowRegisterPage extends AbstractPage
 				Config::get('smtp_sendmail'),
 			), $MailRAW);
 			
-			try {
-				Mail::send($mailAddress, $userName, t('registerMailVertifyTitle', Config::get('game_name')), $MailContent);
-			}
-			catch (Exception $e)
-			{
-				$this->printMessage(t('registerMailError', $e->getMessage()));
-			}
+			Mail::send($mailAddress, $userName, t('registerMailVertifyTitle', Config::get('game_name')), $MailContent);
 			
 			$this->printMessage(t('registerSendComplete'));
 		}

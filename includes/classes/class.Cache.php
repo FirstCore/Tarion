@@ -22,11 +22,11 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: class.Cache.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: class.Cache.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
-include(ROOT_PATH.'includes/classes/cache/ressource/CacheFile.class.php');
+include('includes/classes/cache/ressource/CacheFile.class.php');
 
 class Cache {
 	private $cacheRessource;
@@ -80,7 +80,7 @@ class Cache {
 	
 	function buildCache($Key) {
 		$className		= $this->cacheBuilder[$Key];
-		include_once(ROOT_PATH.'includes/classes/cache/builder/'.$className.'.class.php');
+		include_once('includes/classes/cache/builder/'.$className.'.class.php');
 		$cacheBuilder	= new $className();
 		$cacheData		= $cacheBuilder->buildCache();
 		$cacheData		= (array) $cacheData;

@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: ShowDumpPage.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: ShowDumpPage.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -45,9 +45,9 @@ function ShowDumpPage()
 			}
 			
 			$fileName	= '2MoonsBackup_'.date('d_m_Y_H_i_s', TIMESTAMP).'.sql';
-			$filePath	= ROOT_PATH.'includes/backups/'.$fileName;
+			$filePath	= 'includes/backups/'.$fileName;
 		
-			require ROOT_PATH.'includes/classes/SQLDumper.class.php';
+			require 'includes/classes/SQLDumper.class.php';
 		
 			$dump	= new SQLDumper;
 			$dump->dumpTablesToFile($dbTables, $filePath);

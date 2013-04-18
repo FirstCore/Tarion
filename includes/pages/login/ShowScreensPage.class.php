@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowScreensPage.class.php 2416 2012-11-10 00:12:51Z slaver7 $
+ * @info $Id: ShowScreensPage.class.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -41,7 +41,7 @@ class ShowScreensPage extends AbstractPage
 	function show() 
 	{
 		$screenshots	= array();
-		$directoryIterator = new DirectoryIterator(ROOT_PATH.'styles/resource/images/login/screens/');
+		$directoryIterator = new DirectoryIterator('styles/resource/images/login/screens/');
         foreach ($directoryIterator as $fileinfo) { 
             if (!$fileinfo->isFile())
 			{

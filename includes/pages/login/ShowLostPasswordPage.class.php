@@ -24,7 +24,7 @@
  * @copyright 2012 Jan <info@2moons.cc> (2Moons)
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 2.0.$Revision: 2242 $ (2012-11-31)
- * @info $Id: ShowLostPasswordPage.class.php 2496 2013-01-01 13:26:23Z slaver7 $
+ * @info $Id: ShowLostPasswordPage.class.php 2645 2013-03-26 18:58:25Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -75,11 +75,21 @@ class ShowLostPasswordPage extends AbstractPage
 		$userData		= $GLOBALS['DATABASE']->getFirstRow("SELECT username, email_2 as mail FROM ".USERS." WHERE id = ".$userID.";");
 
 		$MailRAW		= $GLOBALS['LNG']->getTemplate('email_lost_password_changed');
-		$MailContent	= sprintf($MailRAW, $userData['username'], $newPassword, Config::get('game_name'));
+		$MailContent	= str_replace(array(
+			'{USERNAME}',
+			'{GAMENAME}',
+			'{GAMEMAIL}',
+			'{PASSWORD}',
+		), array(
+			$userData['username'],
+			Config::get('game_name').' - '.Config::get('uni_name'),
+			Config::get('smtp_sendmail'),
+			$newPassword,
+		), $MailRAW);
 		
 		$GLOBALS['DATABASE']->query("UPDATE ".USERS." SET password = '".PlayerUtil::cryptPassword($newPassword)."' WHERE id = ".$userID.";");
 		
-		require ROOT_PATH.'includes/classes/Mail.class.php';		
+		require 'includes/classes/Mail.class.php';		
 		Mail::send($userData['mail'], $userData['username'], t('passwordChangedMailTitle', Config::get('game_name')), $MailContent);
 		
 		$GLOBALS['DATABASE']->query("UPDATE ".LOSTPASSWORD." SET hasChanged = 1 WHERE userID = ".$userID." AND `key` = '".$GLOBALS['DATABASE']->escape($validationKey)."';");
@@ -150,9 +160,19 @@ class ShowLostPasswordPage extends AbstractPage
 		$validationKey	= md5(uniqid());
 						
 		$MailRAW		= $GLOBALS['LNG']->getTemplate('email_lost_password_validation');
-		$MailContent	= sprintf($MailRAW, $username, HTTP_PATH.'index.php?page=lostPassword&mode=newPassword&u='.$userID.'&k='.$validationKey, Config::get('game_name'));
 		
-		require ROOT_PATH.'includes/classes/Mail.class.php';		
+		$MailContent	= str_replace(array(
+			'{USERNAME}',
+			'{GAMENAME}',
+			'{VALIDURL}',
+		), array(
+			$username,
+			Config::get('game_name').' - '.Config::get('uni_name'),
+			HTTP_PATH.'index.php?page=lostPassword&mode=newPassword&u='.$userID.'&k='.$validationKey,
+		), $MailRAW);
+		
+		require 'includes/classes/Mail.class.php';
+		
 		Mail::send($mail, $username, t('passwordValidMailTitle', Config::get('game_name')), $MailContent);
 		
 		$GLOBALS['DATABASE']->query("INSERT INTO ".LOSTPASSWORD." SET userID = ".$userID.", `key` = '".$validationKey."', time = ".TIMESTAMP.", fromIP = '".$_SERVER['REMOTE_ADDR']."';");

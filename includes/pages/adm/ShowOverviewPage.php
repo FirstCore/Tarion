@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: ShowOverviewPage.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: ShowOverviewPage.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -40,13 +40,13 @@ function ShowOverviewPage()
 		if(file_exists(ROOT_PATH.'webinstall.php'))
 			$Message[]	= sprintf($LNG['ow_file_detected'], 'webinstall.php');
 			
-		if(file_exists(ROOT_PATH.'includes/ENABLE_INSTALL_TOOL'))
+		if(file_exists('includes/ENABLE_INSTALL_TOOL'))
 			$Message[]	= sprintf($LNG['ow_file_detected'], 'includes/ENABLE_INSTALL_TOOL');
 					
 		if(!is_writable(ROOT_PATH.'cache'))
 			$Message[]	= sprintf($LNG['ow_dir_not_writable'], 'cache');
 			
-		if(!is_writable(ROOT_PATH.'includes'))
+		if(!is_writable('includes'))
 			$Message[]	= sprintf($LNG['ow_dir_not_writable'], 'includes');
 	}
 	

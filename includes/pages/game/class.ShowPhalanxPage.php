@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: class.ShowPhalanxPage.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: class.ShowPhalanxPage.php 2640 2013-03-23 19:23:26Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -58,7 +58,7 @@ class ShowPhalanxPage extends AbstractPage
 	function show()
 	{
 		global $USER, $PLANET, $LNG, $UNI, $resource;
-		require_once(ROOT_PATH.'includes/classes/class.FlyingFleetsTable.php');
+		require_once('includes/classes/class.FlyingFleetsTable.php');
 		
 		$FlyingFleetsTable 	= new FlyingFleetsTable();
 		$this->initTemplate();
@@ -88,7 +88,7 @@ class ShowPhalanxPage extends AbstractPage
 			$this->printMessage($LNG['px_out_of_range']);
 		}
 		
-		require_once(ROOT_PATH . 'includes/classes/class.FlyingFleetsTable.php');
+		require_once('includes/classes/class.FlyingFleetsTable.php');
 		$fleetTableObj = new FlyingFleetsTable;
 		$fleetTableObj->setPhalanxMode();
 		$fleetTableObj->setUser($TargetInfo['id_owner']);

@@ -22,7 +22,7 @@
  * @copyright 2012 Jan Kröpke <info@2moons.cc>
  * @license http://www.gnu.org/licenses/gpl.html GNU GPLv3 License
  * @version 1.7.2 (2013-03-18)
- * @info $Id: class.ShowTraderPage.php 2632 2013-03-18 19:05:14Z slaver7 $
+ * @info $Id: class.ShowTraderPage.php 2644 2013-03-26 18:23:11Z slaver7 $
  * @link http://2moons.cc/
  */
 
@@ -97,10 +97,14 @@ class ShowTraderPage extends AbstractPage
 
 		$getTradeResources	= HTTP::_GP('trade', array());
 		
-		$tradeResources		= array_values(array_diff(array_merge($reslist['resstype'][1], $reslist['resstype'][3]), array($resourceID)));
+		$tradeResources		= array_values(array_diff(array_keys(self::$Charge[$resourceID]), array($resourceID)));
 		$tradeSum 			= 0;
 		
 		foreach($tradeResources as $tradeRessID) {
+			if(!isset($getTradeResources[$tradeRessID]))
+			{
+				continue;
+			}
 			$tradeAmount	= max(0, round((float) $getTradeResources[$tradeRessID]));
 			
 			if(empty($tradeAmount) || !isset(self::$Charge[$resourceID][$tradeRessID]))
